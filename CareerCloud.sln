@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerCloud.Pocos", "CareerCloud.Pocos\CareerCloud.Pocos.csproj", "{A5536034-5403-4BCB-B1BC-DD428EC6985D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloud.Pocos", "CareerCloud.Pocos\CareerCloud.Pocos.csproj", "{A5536034-5403-4BCB-B1BC-DD428EC6985D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloudCore.UnitTests.Assignment1", "CareerCloudCore.UnitTests.Assignment1\CareerCloudCore.UnitTests.Assignment1.csproj", "{83ACDE42-1BCB-4FBB-90C2-496B64003EF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerCloud.DataAccessLayer", "CareerCloud.DataAccessLayer\CareerCloud.DataAccessLayer.csproj", "{209BAC18-5693-4A52-B060-5C4628DAA1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerCloud.ADODataAccessLayer", "CareerCloud.ADODataAccessLayer\CareerCloud.ADODataAccessLayer.csproj", "{4BB55257-9C04-4F4B-9FD3-AFCC84500F01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{83ACDE42-1BCB-4FBB-90C2-496B64003EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83ACDE42-1BCB-4FBB-90C2-496B64003EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83ACDE42-1BCB-4FBB-90C2-496B64003EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209BAC18-5693-4A52-B060-5C4628DAA1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209BAC18-5693-4A52-B060-5C4628DAA1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209BAC18-5693-4A52-B060-5C4628DAA1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209BAC18-5693-4A52-B060-5C4628DAA1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BB55257-9C04-4F4B-9FD3-AFCC84500F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB55257-9C04-4F4B-9FD3-AFCC84500F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB55257-9C04-4F4B-9FD3-AFCC84500F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB55257-9C04-4F4B-9FD3-AFCC84500F01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
