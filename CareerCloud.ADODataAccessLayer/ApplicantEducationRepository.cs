@@ -2,6 +2,7 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -11,7 +12,11 @@ namespace CareerCloud.ADODataAccessLayer
     {
         public void Add(params ApplicantEducationPoco[] items)
         {
-            throw new NotImplementedException();
+           //creating sql con
+           using (SqlConnection connection = new SqlConnection(@"Data Source=WHOOAAAPPPP\HUMBERBRIDGING;Initial Catalog=JOB_PORTAL_DB;Integrated Security=True;"))
+           {
+
+           }
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
