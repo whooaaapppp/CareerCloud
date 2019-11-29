@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CareerCloud.Pocos
-{   [Table("Company_Jobs_Descriptions")]
+{
+    [Table("Company_Jobs_Descriptions")]
     public class CompanyJobDescriptionPoco : IPoco
     {
         [Key]

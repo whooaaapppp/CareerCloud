@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,7 +13,7 @@ namespace CareerCloud.Pocos
         public string Skill { get; set; }
         [Column("Skill_Level")]
         public string SkillLevel { get; set; }
-        public int Importance { get; set; } 
+        public int Importance { get; set; }
         [Column("Time_Stamp")]
         public Byte[] TimeStamp { get; set; }
 
