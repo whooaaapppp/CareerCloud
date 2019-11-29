@@ -1,8 +1,10 @@
 ﻿using CareerCloud.DataAccessLayer;
 using CareerCloud.Pocos;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -10,6 +12,18 @@ namespace CareerCloud.ADODataAccessLayer
 {
     public class ApplicantEducationRepository : IDataRepository<ApplicantEducationPoco>
     {
+        protected readonly string _connstr;
+        public ApplicantEducationRepository()
+        {
+            //create Config Builder
+            var config = new ConfigurationBuilder();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            config.AddJsonFile(path, false);
+            var root = config.Build();
+            _connstr = root.GetSection("ConnectionStrings").GetSection("DataConnection").Value;
+        }
+        
+        
         public void Add(params ApplicantEducationPoco[] items)
         {
            //creating sql con
