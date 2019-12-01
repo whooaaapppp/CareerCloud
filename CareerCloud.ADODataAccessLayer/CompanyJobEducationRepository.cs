@@ -29,6 +29,20 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach(CompanyJobEducationPoco item in items)
+                {
+                    comm.CommandText = @"INSERT INTO [dbo].[Company_Job_Educations]( [Id], [Job], [Major], [Importance] )
+                                        VALUES( @Id, @Job, @Major, @Importance )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Major", item.Major);
+                    comm.Parameters.AddWithValue("@Importance", item.Importance);
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
@@ -40,11 +54,29 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Job], [Major], [Importance], [Time_Stamp]
+                                    FROM [dbo].[Company_Job_Educations]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                CompanyJobEducationPoco[] companyJobEducationPocos = new CompanyJobEducationPoco[1000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    CompanyJobEducationPoco companyJobEducationPoco = new CompanyJobEducationPoco();
+                    companyJobEducationPoco.Id = sqlReader.GetGuid(0);
+                    companyJobEducationPoco.Job = sqlReader.GetGuid(1);
+                    companyJobEducationPoco.Major = sqlReader.GetString(2);
+                    companyJobEducationPoco.Importance = sqlReader.GetInt16(3);
+                    companyJobEducationPoco.TimeStamp = (byte[])sqlReader[4];
+                    companyJobEducationPocos[index] = companyJobEducationPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return companyJobEducationPocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public CompanyJobEducationPoco GetSingle(Expression<Func<CompanyJobEducationPoco, bool>> where, params Expression<Func<CompanyJobEducationPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
@@ -79,6 +111,21 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (CompanyJobEducationPoco item in items)
+                {
+                    comm.CommandText = @"UPDATE [dbo].[Company_Job_Educations]
+                                        SET [Job] = @Job, [Major] = @Major, [Importance] = @Importance
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Major", item.Major);
+                    comm.Parameters.AddWithValue("@Importance", item.Importance);
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
         /* unimplemented interface methods for future iterations */
