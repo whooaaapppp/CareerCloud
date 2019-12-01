@@ -25,14 +25,29 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Add(params CompanyJobSkillPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+
+                foreach (CompanyJobSkillPoco item in items)
+                {
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
 
         
 
         public IList<CompanyJobSkillPoco> GetAll(params Expression<Func<CompanyJobSkillPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+            }
         }
 
         
@@ -47,12 +62,34 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params CompanyJobSkillPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+
+                foreach(CompanyJobSkillPoco item in items)
+                {
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
 
         public void Update(params CompanyJobSkillPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+
+                foreach (CompanyJobSkillPoco item in items)
+                {
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
         /* unimplemented interface methods for future iterations */
         public IList<CompanyJobSkillPoco> GetList(Expression<Func<CompanyJobSkillPoco, bool>> where, params Expression<Func<CompanyJobSkillPoco, object>>[] navigationProperties)
