@@ -55,8 +55,6 @@ namespace CareerCloud.ADODataAccessLayer
             }
         }
 
-        
-
         public IList<ApplicantWorkHistoryPoco> GetAll(params Expression<Func<ApplicantWorkHistoryPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
@@ -91,6 +89,29 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (ApplicantWorkHistoryPoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"UPDATE [dbo].[Applicant_Work_History]
+                                        SET [Applicant] = @Applicant, [Company_Name] = @Company_Name, [Country_Code] = @Country_Code, [Location] = @Location, [Job_Title] = @Job_Title, [Job_Description] = @Job_Description, [Start_Month] = @Start_Month, [Start_Year] = @Start_Year, [End_Month] = @End_Month, [End_Year] = @End_Year
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Applicant", item.Applicant);
+                    comm.Parameters.AddWithValue("@Company_Name", item.CompanyName);
+                    comm.Parameters.AddWithValue("@Country_Code", item.CountryCode);
+                    comm.Parameters.AddWithValue("@Location", item.Location);
+                    comm.Parameters.AddWithValue("@Job_Title", item.JobTitle);
+                    comm.Parameters.AddWithValue("@Job_Description", item.JobDescription);
+                    comm.Parameters.AddWithValue("@Start_Month", item.StartMonth);
+                    comm.Parameters.AddWithValue("@Start_Year", item.StartYear);
+                    comm.Parameters.AddWithValue("@End_Month", item.EndMonth);
+                    comm.Parameters.AddWithValue("@End_Year", item.EndYear);
+                    //extract rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
