@@ -32,16 +32,8 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(ApplicantJobApplicationPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"INSERT INTO [dbo].[Applicant_Job_Applications]
-                                       ([Id]
-                                       ,[Applicant]
-                                       ,[Job]
-                                       ,[Application_Date])
-                                        VALUES
-                                       (@Id
-                                       ,@Applicant
-                                       ,@Job
-                                       ,@Application_Date)";
+                    comm.CommandText = @"INSERT INTO [dbo].[Applicant_Job_Applications]( [Id], [Applicant], [Job], [Application_Date] )
+                                        VALUES( @Id, @Applicant, @Job, @Application_Date )";
 
                     comm.Parameters.AddWithValue("@Id", item.Id);
                     comm.Parameters.AddWithValue("@Applicant", item.Applicant);
@@ -62,11 +54,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
-                comm.CommandText = @"SELECT [Id]
-                                  ,[Applicant]
-                                  ,[Job]
-                                  ,[Application_Date]
-                                  ,[Time_Stamp]
+                comm.CommandText = @"SELECT [Id], [Applicant], [Job], [Application_Date], [Time_Stamp]
                                     FROM [dbo].[Applicant_Job_Applications]";
                 connection.Open();
                 int index = 0;
@@ -127,9 +115,7 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(ApplicantJobApplicationPoco item in items)
                 {
                     comm.CommandText = @"UPDATE [dbo].[Applicant_Job_Applications]
-                                       SET [Applicant] = @Applicant
-                                          ,[Job] = @Job
-                                          ,[Application_Date] = @Application_Date
+                                        SET [Applicant] = @Applicant, [Job] = @Job, [Application_Date] = @Application_Date
                                         WHERE Id = @Id";
                     comm.Parameters.AddWithValue("@Applicant", item.Applicant);
                     comm.Parameters.AddWithValue("@Job", item.Job);

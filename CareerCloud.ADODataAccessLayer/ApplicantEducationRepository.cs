@@ -34,24 +34,8 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (ApplicantEducationPoco item in items)
                 {
                     //preppping the sql payloader
-                    comm.CommandText = @"INSERT INTO[dbo].[Applicant_Educations]
-                                        ([Id], 
-                                         [Applicant], 
-                                         [Major], 
-                                         [Certificate_Diploma], 
-                                         [Start_Date], 
-                                         [Completion_Date], 
-                                         [Completion_Percent]
-                                        )
-                                        VALUES
-                                        (@Id,
-                                         @Applicant,
-                                         @Major,
-                                         @Certificate_Diploma,
-                                         @Start_Date,
-                                         @Completion_Date,
-                                         @Completion_Percent
-                                        )";
+                    comm.CommandText = @"INSERT INTO [dbo].[Applicant_Educations]( [Id], [Applicant], [Major], [Certificate_Diploma], [Start_Date], [Completion_Date], [Completion_Percent] )
+                                        VALUES( @Id, @Applicant, @Major, @Certificate_Diploma, @Start_Date, @Completion_Date, @Completion_Percent )";
                     comm.Parameters.AddWithValue("@Id", item.Id);
                     comm.Parameters.AddWithValue("@Applicant", item.Applicant);
                     comm.Parameters.AddWithValue("@Major", item.Major);
@@ -73,15 +57,8 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
-                comm.CommandText = @"SELECT [Id]
-                                  ,[Applicant]
-                                  ,[Major]
-                                  ,[Certificate_Diploma]
-                                  ,[Start_Date]
-                                  ,[Completion_Date]
-                                  ,[Completion_Percent]
-                                  ,[Time_Stamp]
-                                   FROM [dbo].[Applicant_Educations]";
+                comm.CommandText = @"SELECT [Id], [Applicant], [Major], [Certificate_Diploma], [Start_Date], [Completion_Date], [Completion_Percent], [Time_Stamp]
+                                    FROM [dbo].[Applicant_Educations]";
                 connection.Open();
                 int index = 0;
                 SqlDataReader sqlReader = comm.ExecuteReader();
@@ -146,13 +123,8 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (ApplicantEducationPoco item in items)
                 {
                     comm.CommandText = @"UPDATE [dbo].[Applicant_Educations]
-                                       SET [Applicant] = @Applicant
-                                          ,[Major] = @Major
-                                          ,[Certificate_Diploma] = @Certificate_Diploma
-                                          ,[Start_Date] = @Start_Date
-                                          ,[Completion_Date] = @Completion_Date
-                                          ,[Completion_Percent] = @Completion_Percent
-                                           WHERE [Id] = @Id";
+                                         SET [Applicant] = @Applicant, [Major] = @Major, [Certificate_Diploma] = @Certificate_Diploma, [Start_Date] = @Start_Date, [Completion_Date] = @Completion_Date, [Completion_Percent] = @Completion_Percent
+                                        WHERE [Id] = @Id";
                     comm.Parameters.AddWithValue("@Id", item.Id);
                     comm.Parameters.AddWithValue("@Applicant", item.Applicant);
                     comm.Parameters.AddWithValue("@Major", item.Major);

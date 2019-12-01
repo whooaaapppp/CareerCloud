@@ -29,6 +29,24 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                
+                foreach(ApplicantProfilePoco item in items)
+                {
+                    comm.CommandText = @"INSERT INTO dbo.Applicant_Profiles( Id, Login, Current_Salary, Current_Rate, Currency, Country_Code, State_Province_Code, Street_Address, City_Town, Zip_Postal_Code )
+                                        VALUES( @Id, @Login, @Current_Salary, @Current_Rate, @Currency, @Country_Code, @State_Province_Code, @Street_Address, @City_Town, @Zip_Postal_Code )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Current_Salary", item.CurrentSalary);
+                    comm.Parameters.AddWithValue("@Current_Rate", item.CurrentRate);
+                    comm.Parameters.AddWithValue("@Currency", item.Currency);
+                    comm.Parameters.AddWithValue("@Country_Code", item.Country);
+                    comm.Parameters.AddWithValue("@State_Province_Code", item.Province);
+                    comm.Parameters.AddWithValue("@Street_Address", item.Street);
+                    comm.Parameters.AddWithValue("@City_Town", item.City);
+                    comm.Parameters.AddWithValue("@Zip_Postal_Code", item.PostalCode);
+                    
+
+                }
             }
         }
 
