@@ -54,10 +54,37 @@ namespace CareerCloud.ADODataAccessLayer
         }
         public IList<ApplicantSkillPoco> GetAll(params Expression<Func<ApplicantSkillPoco, object>>[] navigationProperties)
         {
+            //getall list on the poco
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Applicant], [Skill], [Skill_Level], [Start_Month], [Start_Year], [End_Month], [End_Year], [Time_Stamp]
+                                    FROM [dbo].[Applicant_Skills]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                ApplicantSkillPoco[] appSkillPocos = new ApplicantSkillPoco[500];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    ApplicantSkillPoco appSkillPoco = new ApplicantSkillPoco();
+                    appSkillPoco.Id = sqlReader.GetGuid(0);
+                    appSkillPoco.Applicant = sqlReader.GetGuid(1);
+                    appSkillPoco.Skill = sqlReader.GetString(2);
+                    appSkillPoco.SkillLevel = sqlReader.GetString(3);
+                    appSkillPoco.StartMonth = sqlReader.GetByte(4);
+                    appSkillPoco.StartYear = sqlReader.GetInt32(5);
+                    appSkillPoco.EndMonth = sqlReader.GetByte(6);
+                    appSkillPoco.EndYear = sqlReader.GetInt32(7);
+                    appSkillPoco.TimeStamp = (byte[])sqlReader[8];
+                    appSkillPocos[index] = appSkillPoco;
+                    index++;
+                }
+                
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return appSkillPocos.Where(a => a != null).ToList();
             }
         }
 
