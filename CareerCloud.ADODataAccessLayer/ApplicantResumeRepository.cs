@@ -89,6 +89,16 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach(ApplicantResumePoco item in items)
+                {
+                    comm.CommandText = @"DELETE FROM [dbo].[Applicant_Resumes]
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
