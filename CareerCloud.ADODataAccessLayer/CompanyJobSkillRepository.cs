@@ -69,6 +69,9 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach(CompanyJobSkillPoco item in items)
                 {
+                    comm.CommandText = @"DELETE FROM [dbo].[Company_Job_Skills]
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
