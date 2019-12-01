@@ -66,12 +66,6 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<ApplicantEducationPoco> GetAll(params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
         {
             //getall list on the poco
@@ -114,28 +108,49 @@ namespace CareerCloud.ADODataAccessLayer
             
         }
 
-        public IList<ApplicantEducationPoco> GetList(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
-        {
-            throw new NotImplementedException();
-        }
-
         public ApplicantEducationPoco GetSingle(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
             IQueryable<ApplicantEducationPoco> appEduPocos = GetAll().AsQueryable();
             /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
-            return appEduPocos.Where(where).FirstOrDefault(); 
+            return appEduPocos.Where(where).FirstOrDefault();
 
         }
 
         public void Remove(params ApplicantEducationPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+
+                foreach(ApplicantEducationPoco item in items)
+                {
+                    comm.CommandText = @"DELETE FROM [dbo].[Applicant_Educations]
+                                        WHERE Id = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
 
         public void Update(params ApplicantEducationPoco[] items)
         {
             throw new NotImplementedException();
         }
+
+        /* unimplemented interface methods for future iterations */
+        public IList<ApplicantEducationPoco> GetList(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
+        {
+            throw new NotImplementedException();
+        }
+        public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }
