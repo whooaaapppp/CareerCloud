@@ -55,11 +55,39 @@ namespace CareerCloud.ADODataAccessLayer
             }
         }
 
-       
-
         public IList<ApplicantJobApplicationPoco> GetAll(params Expression<Func<ApplicantJobApplicationPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            //getall list on the poco
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id]
+                                  ,[Applicant]
+                                  ,[Job]
+                                  ,[Application_Date]
+                                  ,[Time_Stamp]
+                                    FROM [dbo].[Applicant_Job_Applications]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                ApplicantJobApplicationPoco[] appJobApplicationPocos = new ApplicantJobApplicationPoco[1000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    ApplicantJobApplicationPoco appJobApplicationPoco = new ApplicantJobApplicationPoco();
+                    appJobApplicationPoco.Id = sqlReader.GetGuid(0);
+                    appJobApplicationPoco.Applicant = sqlReader.GetGuid(1);
+                    appJobApplicationPoco.Job = sqlReader.GetGuid(2);
+                    appJobApplicationPoco.ApplicationDate = sqlReader.GetDateTime(3);
+                    appJobApplicationPoco.TimeStamp = (byte[])sqlReader[4];
+                    appJobApplicationPocos[index] = appJobApplicationPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return appJobApplicationPocos.Where(a => a != null).ToList();
+            }
         }
 
         
