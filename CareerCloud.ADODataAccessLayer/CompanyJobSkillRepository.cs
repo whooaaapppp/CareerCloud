@@ -32,14 +32,21 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (CompanyJobSkillPoco item in items)
                 {
+                    //prepping the sql query
+                    comm.CommandText = @"INSERT INTO [dbo].[Company_Job_Skills]( [Id], [Job], [Skill], [Skill_Level], [Importance] )
+                                        VALUES( @Id, @Job, @Skill, @Skill_Level, @Importance )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Skill", item.Skill);
+                    comm.Parameters.AddWithValue("@Skill_Level", item.SkillLevel);
+                    comm.Parameters.AddWithValue("@Importance", item.Importance);
+                    //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
                 }
             }
         }
-
-        
 
         public IList<CompanyJobSkillPoco> GetAll(params Expression<Func<CompanyJobSkillPoco, object>>[] navigationProperties)
         {
