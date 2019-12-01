@@ -85,9 +85,6 @@ namespace CareerCloud.ADODataAccessLayer
                 return appProfilePocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public ApplicantProfilePoco GetSingle(Expression<Func<ApplicantProfilePoco, bool>> where, params Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
@@ -102,6 +99,16 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach(ApplicantProfilePoco item in items)
+                {
+                    comm.CommandText = @"DELETE FROM [dbo].[Applicant_Profiles]
+                                        WHERE Id = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
