@@ -54,11 +54,31 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                comm.CommandText = @"SELECT [Id], [Job], [Skill], [Skill_Level], [Importance], [Time_Stamp]
+                                    FROM [dbo].[Company_Job_Skills]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                CompanyJobSkillPoco[] companyJobSkillPocos = new CompanyJobSkillPoco[10000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    CompanyJobSkillPoco companyJobSkillPoco = new CompanyJobSkillPoco();
+                    companyJobSkillPoco.Id = sqlReader.GetGuid(0);
+                    companyJobSkillPoco.Job = sqlReader.GetGuid(1);
+                    companyJobSkillPoco.Skill = sqlReader.GetString(2);
+                    companyJobSkillPoco.SkillLevel = sqlReader.GetString(3);
+                    companyJobSkillPoco.Importance = sqlReader.GetInt32(4);
+                    companyJobSkillPoco.TimeStamp = (byte[])sqlReader[5];
+                    companyJobSkillPocos[index] = companyJobSkillPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return companyJobSkillPocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public CompanyJobSkillPoco GetSingle(Expression<Func<CompanyJobSkillPoco, bool>> where, params Expression<Func<CompanyJobSkillPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
