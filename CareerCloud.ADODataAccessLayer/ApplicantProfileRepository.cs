@@ -49,19 +49,40 @@ namespace CareerCloud.ADODataAccessLayer
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
-
                 }
             }
         }
-
-        
-
         public IList<ApplicantProfilePoco> GetAll(params Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                ApplicantProfilePoco[] appProfilePocos = new ApplicantProfilePoco[100];
+                //while sql reader has something to read
+                while (sqlReader.Read())
+                {
+                    ApplicantProfilePoco appProfilePoco = new ApplicantProfilePoco();
+                    appProfilePoco.Id = sqlReader.GetGuid(0);
+                    appProfilePoco.Login = sqlReader.GetGuid(1);
+                    appProfilePoco.CurrentSalary = (Decimal?)sqlReader.GetDecimal(2);
+                    appProfilePoco.CurrentRate = (Decimal?)sqlReader.GetDecimal(3);
+                    appProfilePoco.Currency = sqlReader.GetString(4);
+                    appProfilePoco.Country = sqlReader.GetString(5);
+                    appProfilePoco.Province = sqlReader.GetString(6);
+                    appProfilePoco.Street = sqlReader.GetString(7);
+                    appProfilePoco.City = sqlReader.GetString(8);
+                    appProfilePoco.PostalCode = sqlReader.GetString(9);
+                    appProfilePoco.TimeStamp = (byte[])sqlReader[10];
+                    appProfilePocos[index] = appProfilePoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null ApplicationEducationPoco object a and pass it to list
+                return appProfilePocos.Where(a => a != null).ToList();
             }
         }
 
