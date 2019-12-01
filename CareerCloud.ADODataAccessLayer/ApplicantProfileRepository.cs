@@ -25,14 +25,22 @@ namespace CareerCloud.ADODataAccessLayer
         
         public void Add(params ApplicantProfilePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+            }
         }
 
         
 
         public IList<ApplicantProfilePoco> GetAll(params Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+            }
         }
 
         
@@ -47,12 +55,20 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params ApplicantProfilePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+            }
         }
 
         public void Update(params ApplicantProfilePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+            }
         }
 
         /* unimplemented interface methods for future iterations */
