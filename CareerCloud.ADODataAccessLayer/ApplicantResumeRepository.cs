@@ -108,6 +108,20 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach(ApplicantResumePoco item in items)
+                {
+                    comm.CommandText = @"UPDATE [dbo].[Applicant_Resumes]
+                                        SET [Applicant] = @Applicant, [Resume] = @Resume, [Last_Updated] = @Last_Updated
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Applicant", item.Applicant);
+                    comm.Parameters.AddWithValue("@Resume", item.Resume);
+                    comm.Parameters.AddWithValue("@Last_Updated", item.LastUpdated);
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
         /* unimplemented interface methods for future iterations */
