@@ -56,11 +56,30 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Company], [Profile_Created], [Is_Inactive], [Is_Company_Hidden], [Time_Stamp]
+                                    FROM [dbo].[Company_Jobs]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                CompanyJobPoco[] companyJobPocos = new CompanyJobPoco[5000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    CompanyJobPoco companyJobPoco = new CompanyJobPoco();
+                    companyJobPoco.Id = sqlReader.GetGuid(0);
+                    companyJobPoco.Company = sqlReader.GetGuid(1);
+                    companyJobPoco.ProfileCreated = sqlReader.GetDateTime(2);
+                    companyJobPoco.IsInactive = sqlReader.GetBoolean(3);
+                    companyJobPoco.IsCompanyHidden = sqlReader.GetBoolean(4);
+                    companyJobPoco.TimeStamp = (byte[])sqlReader[5];
+                    companyJobPocos[index] = companyJobPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return companyJobPocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public CompanyJobPoco GetSingle(Expression<Func<CompanyJobPoco, bool>> where, params Expression<Func<CompanyJobPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
