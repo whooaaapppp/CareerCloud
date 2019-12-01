@@ -45,17 +45,33 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-        
-
-        
-
         public IList<ApplicantResumePoco> GetAll(params Expression<Func<ApplicantResumePoco, object>>[] navigationProperties)
         {
+            //getall list on the poco
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
-
+                comm.CommandText = @"SELECT [Id], [Applicant], [Resume], [Last_Updated]
+                                    FROM [dbo].[Applicant_Resumes]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                ApplicantResumePoco[] appResumePocos = new ApplicantResumePoco[100];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    ApplicantResumePoco appResumePoco = new ApplicantResumePoco();
+                    appResumePoco.Id = sqlReader.GetGuid(0);
+                    appResumePoco.Applicant = sqlReader.GetGuid(1);
+                    appResumePoco.Resume = sqlReader.GetString(2);
+                    appResumePoco.LastUpdated = sqlReader.GetDateTime(3);
+                    appResumePocos[index] = appResumePoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return appResumePocos.Where(a => a != null).ToList();
             } 
         }
 
