@@ -39,7 +39,10 @@ namespace CareerCloud.ADODataAccessLayer
 
         public ApplicantProfilePoco GetSingle(Expression<Func<ApplicantProfilePoco, bool>> where, params Expression<Func<ApplicantProfilePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
+            IQueryable<ApplicantProfilePoco> appProfilePocos = GetAll().AsQueryable();
+            /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
+            return appProfilePocos.Where(where).FirstOrDefault();
         }
 
         public void Remove(params ApplicantProfilePoco[] items)
