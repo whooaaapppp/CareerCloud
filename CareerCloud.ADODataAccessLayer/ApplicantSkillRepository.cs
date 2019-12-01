@@ -81,7 +81,6 @@ namespace CareerCloud.ADODataAccessLayer
                     appSkillPocos[index] = appSkillPoco;
                     index++;
                 }
-                
                 connection.Close();
                 //return only non-null poco object -> a and pass it to list
                 return appSkillPocos.Where(a => a != null).ToList();
