@@ -47,19 +47,36 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        
-
         public IList<CompanyDescriptionPoco> GetAll(params Expression<Func<CompanyDescriptionPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Company], [LanguageID], [Company_Name], [Company_Description], [Time_Stamp]
+                                    FROM [dbo].[Company_Descriptions]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                CompanyDescriptionPoco[] companyDescriptionPocos = new CompanyDescriptionPoco[1000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    CompanyDescriptionPoco companyDescriptionPoco = new CompanyDescriptionPoco();
+                    companyDescriptionPoco.Id = sqlReader.GetGuid(0);
+                    companyDescriptionPoco.Company = sqlReader.GetGuid(1);
+                    companyDescriptionPoco.LanguageId = sqlReader.GetString(2);
+                    companyDescriptionPoco.CompanyName = sqlReader.GetString(3);
+                    companyDescriptionPoco.CompanyDescription = sqlReader.GetString(4);
+                    companyDescriptionPoco.TimeStamp = (byte[])sqlReader[5];
+                    companyDescriptionPocos[index] = companyDescriptionPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return companyDescriptionPocos.Where(a => a != null).ToList();
             }
         }
-
-        
 
         public CompanyDescriptionPoco GetSingle(Expression<Func<CompanyDescriptionPoco, bool>> where, params Expression<Func<CompanyDescriptionPoco, object>>[] navigationProperties)
         {
