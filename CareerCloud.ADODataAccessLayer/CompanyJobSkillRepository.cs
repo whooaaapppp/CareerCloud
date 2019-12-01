@@ -88,6 +88,14 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (CompanyJobSkillPoco item in items)
                 {
+                    comm.CommandText = @"UPDATE [dbo].[Company_Job_Skills]
+                                        SET [Job] = @Job, [Skill] = @Skill, [Skill_Level] = @Skill_Level, [Importance] = @Importance
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Skill", item.Skill);
+                    comm.Parameters.AddWithValue("@Skill_Level", item.SkillLevel);
+                    comm.Parameters.AddWithValue("@Importance", item.Importance);
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
