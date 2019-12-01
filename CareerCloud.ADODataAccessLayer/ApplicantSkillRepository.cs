@@ -31,11 +31,27 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (ApplicantSkillPoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"INSERT INTO [dbo].[Applicant_Skills]( [Id], [Applicant], [Skill], [Skill_Level], [Start_Month], [Start_Year], [End_Month], [End_Year] )
+                                        VALUES( @Id, @Applicant, @Skill, @Skill_Level, @Start_Month, @Start_Year, @End_Month, @End_Year )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Applicant", item.Applicant);
+                    comm.Parameters.AddWithValue("@Skill", item.Skill);
+                    comm.Parameters.AddWithValue("@Skill_Level", item.SkillLevel);
+                    comm.Parameters.AddWithValue("@Start_Month", item.StartMonth);
+                    comm.Parameters.AddWithValue("@Start_Year", item.StartYear);
+                    comm.Parameters.AddWithValue("@End_Month", item.EndMonth);
+                    comm.Parameters.AddWithValue("@End_Year", item.EndYear);
+                    //extract rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
-
-        
-
         public IList<ApplicantSkillPoco> GetAll(params Expression<Func<ApplicantSkillPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
