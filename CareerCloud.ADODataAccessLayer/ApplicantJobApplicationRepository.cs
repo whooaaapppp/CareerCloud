@@ -119,7 +119,24 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Update(params ApplicantJobApplicationPoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+
+                foreach(ApplicantJobApplicationPoco item in items)
+                {
+                    comm.CommandText = @"UPDATE [dbo].[Applicant_Job_Applications]
+                                       SET [Applicant] = @Applicant
+                                          ,[Job] = @Job
+                                          ,[Application_Date] = @Application_Date
+                                        WHERE Id = @Id";
+                    comm.Parameters.AddWithValue("@Applicant", item.Applicant);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Application_Date", item.ApplicationDate);
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                }
+            }
         }
         /* unimplemented interface methods for future iterations */
         public IList<ApplicantJobApplicationPoco> GetList(Expression<Func<ApplicantJobApplicationPoco, bool>> where, params Expression<Func<ApplicantJobApplicationPoco, object>>[] navigationProperties)
