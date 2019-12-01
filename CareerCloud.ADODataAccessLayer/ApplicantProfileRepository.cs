@@ -25,6 +25,7 @@ namespace CareerCloud.ADODataAccessLayer
         
         public void Add(params ApplicantProfilePoco[] items)
         {
+            //creating sql con
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
@@ -44,7 +45,10 @@ namespace CareerCloud.ADODataAccessLayer
                     comm.Parameters.AddWithValue("@Street_Address", item.Street);
                     comm.Parameters.AddWithValue("@City_Town", item.City);
                     comm.Parameters.AddWithValue("@Zip_Postal_Code", item.PostalCode);
-                    
+                    //sql open execute connection sequence
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
 
                 }
             }
