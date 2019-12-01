@@ -32,17 +32,24 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
 
-                foreach(CompanyJobPoco item in items)
+                foreach (CompanyJobPoco item in items)
                 {
+                    //prepping the sql query
+                    comm.CommandText = @"INSERT INTO [dbo].[Company_Jobs]( [Id], [Company], [Profile_Created], [Is_Inactive], [Is_Company_Hidden] )
+                                        VALUES( @Id, @Company, @Profile_Created, @Is_Inactive, @Is_Company_Hidden )";
+
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Company", item.Company);
+                    comm.Parameters.AddWithValue("@Profile_Created", item.ProfileCreated);
+                    comm.Parameters.AddWithValue("@Is_Inactive", item.IsInactive);
+                    comm.Parameters.AddWithValue("@Is_Company_Hidden", item.IsCompanyHidden);
+                    //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
                 }
             }
         }
-
-        
-
         public IList<CompanyJobPoco> GetAll(params Expression<Func<CompanyJobPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
@@ -87,6 +94,14 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (CompanyJobPoco item in items)
                 {
+                    comm.CommandText = @"UPDATE [dbo].[Company_Jobs]
+                                        SET [Company] = @Company, [Profile_Created] = @Profile_Created, [Is_Inactive] = @Is_Inactive, [Is_Company_Hidden] = @Is_Company_Hidden
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Company", item.Company);
+                    comm.Parameters.AddWithValue("@Profile_Created", item.ProfileCreated);
+                    comm.Parameters.AddWithValue("@Is_Inactive", item.IsInactive);
+                    comm.Parameters.AddWithValue("@Is_Company_Hidden", item.IsCompanyHidden);
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
