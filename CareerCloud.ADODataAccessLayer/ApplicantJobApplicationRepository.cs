@@ -52,7 +52,7 @@ namespace CareerCloud.ADODataAccessLayer
             throw new NotImplementedException();
         }
         /* unimplemented interface methods for future iterations */
-        public IList<ApplicantEducationPoco> GetList(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
+        public IList<ApplicantJobApplicationPoco> GetList(Expression<Func<ApplicantJobApplicationPoco, bool>> where, params Expression<Func<ApplicantJobApplicationPoco, object>>[] navigationProperties)
         {
             throw new NotImplementedException();
         }
