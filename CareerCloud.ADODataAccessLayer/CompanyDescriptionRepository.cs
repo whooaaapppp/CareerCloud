@@ -29,6 +29,22 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (CompanyDescriptionPoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"INSERT INTO [dbo].[Company_Descriptions]( [Id], [Company], [LanguageID], [Company_Name], [Company_Description] )
+                                        VALUES( @Id, @Company, @LanguageID, @Company_Name, @Company_Description )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Company", item.Company);
+                    comm.Parameters.AddWithValue("@LanguageID", item.LanguageId);
+                    comm.Parameters.AddWithValue("@Company_Name", item.CompanyName);
+                    comm.Parameters.AddWithValue("@Company_Description", item.CompanyDescription);
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
