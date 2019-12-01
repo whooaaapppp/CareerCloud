@@ -75,15 +75,12 @@ namespace CareerCloud.ADODataAccessLayer
             } 
         }
 
-        
-
         public ApplicantResumePoco GetSingle(Expression<Func<ApplicantResumePoco, bool>> where, params Expression<Func<ApplicantResumePoco, object>>[] navigationProperties)
         {
-            using (SqlConnection connection = new SqlConnection(_connstr))
-            {
-                SqlCommand comm = new SqlCommand();
-                comm.Connection = connection;
-            }
+            /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
+            IQueryable<ApplicantResumePoco> appResumePocos = GetAll().AsQueryable();
+            /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
+            return appResumePocos.Where(where).FirstOrDefault();
         }
 
         public void Remove(params ApplicantResumePoco[] items)
