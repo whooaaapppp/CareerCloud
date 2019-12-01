@@ -24,7 +24,6 @@ namespace CareerCloud.ADODataAccessLayer
             _connstr = root.GetSection("ConnectionStrings").GetSection("DataConnection").Value;
         }
 
-
         public void Add(params ApplicantEducationPoco[] items)
         {
             //creating sql con
@@ -64,11 +63,8 @@ namespace CareerCloud.ADODataAccessLayer
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
-
                 }
             }
-
-
         }
 
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
@@ -79,7 +75,6 @@ namespace CareerCloud.ADODataAccessLayer
         public IList<ApplicantEducationPoco> GetAll(params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
         {
             //getall list on the poco
-
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
@@ -112,11 +107,11 @@ namespace CareerCloud.ADODataAccessLayer
                     appEduPocos[index] = appEduPoco;
                     index++;
                 }
-
+                connection.Close();
+                //return only non-null ApplicationEducationPoco object a and pass it to list
                 return appEduPocos.Where(a => a != null).ToList();
-
-
             }
+            
         }
 
         public IList<ApplicantEducationPoco> GetList(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
@@ -126,8 +121,11 @@ namespace CareerCloud.ADODataAccessLayer
 
         public ApplicantEducationPoco GetSingle(Expression<Func<ApplicantEducationPoco, bool>> where, params Expression<Func<ApplicantEducationPoco, object>>[] navigationProperties)
         {
+            /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
+            IQueryable<ApplicantEducationPoco> appEduPocos = GetAll().AsQueryable();
+            /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
+            return appEduPocos.Where(where).FirstOrDefault(); 
 
-            throw new NotImplementedException();
         }
 
         public void Remove(params ApplicantEducationPoco[] items)
