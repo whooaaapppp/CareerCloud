@@ -121,6 +121,9 @@ namespace CareerCloud.ADODataAccessLayer
                     comm.Parameters.AddWithValue("@Job", item.Job);
                     comm.Parameters.AddWithValue("@Application_Date", item.ApplicationDate);
                     comm.Parameters.AddWithValue("@Id", item.Id);
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
         }

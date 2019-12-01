@@ -118,6 +118,25 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach(ApplicantProfilePoco item in items)
+                {
+                    comm.CommandText = @"UPDATE [dbo].[Applicant_Profiles]
+                                        SET [Login] = @Login, [Current_Salary] = @Current_Salary, [Current_Rate] = @Current_Rate, [Currency] = @Currency, [Country_Code] = @Country_Code, [State_Province_Code] = @State_Province_Code, [Street_Address] = @Street_Address, [City_Town] = @City_Town, [Zip_Postal_Code] = @Zip_Postal_Code
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Current_Salary", item.CurrentSalary);
+                    comm.Parameters.AddWithValue("@Current_Rate", item.CurrentRate);
+                    comm.Parameters.AddWithValue("@Currency", item.Currency);
+                    comm.Parameters.AddWithValue("@Country_Code", item.Country);
+                    comm.Parameters.AddWithValue("@State_Province_Code", item.Province);
+                    comm.Parameters.AddWithValue("@Street_Address", item.Street);
+                    comm.Parameters.AddWithValue("@City_Town", item.City);
+                    comm.Parameters.AddWithValue("@Zip_Postal_Code", item.PostalCode);
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
