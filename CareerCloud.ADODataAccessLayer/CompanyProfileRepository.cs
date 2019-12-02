@@ -34,8 +34,8 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(CompanyProfilePoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"SELECT [Id], [Registration_Date], [Company_Website], [Contact_Phone], [Contact_Name], [Company_Logo], [Time_Stamp]
-                                        FROM [dbo].[Company_Profiles]";
+                    comm.CommandText = @"INSERT INTO [dbo].[Company_Profiles]( [Id], [Registration_Date], [Company_Website], [Contact_Phone], [Contact_Name], [Company_Logo] )
+                                        VALUES( @Id, @Registration_Date, @Company_Website, @Contact_Phone, @Contact_Name, @Company_Logo )";
                     comm.Parameters.AddWithValue("@Id", item.Id);
                     comm.Parameters.AddWithValue("@Registration_Date", item.RegistrationDate);
                     comm.Parameters.AddWithValue("@Company_Website", item.CompanyWebsite);
