@@ -25,14 +25,35 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Add(params SystemLanguageCodePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+
+                foreach(SystemLanguageCodePoco item in items)
+                {
+                    comm.CommandText = @"INSERT INTO [dbo].[System_Language_Codes]( [LanguageID], [Name], [Native_Name] )
+                                        VALUES( @LanguageID, @Name, @Native_Name )";
+                    comm.Parameters.AddWithValue("@LanguageID", item.LanguageID);
+                    comm.Parameters.AddWithValue("@Name", item.Name);
+                    comm.Parameters.AddWithValue("@Native_Name", item.NativeName);
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
 
         
 
         public IList<SystemLanguageCodePoco> GetAll(params Expression<Func<SystemLanguageCodePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+            }
         }
 
         
@@ -47,14 +68,47 @@ namespace CareerCloud.ADODataAccessLayer
 
         public void Remove(params SystemLanguageCodePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+                foreach (SystemLanguageCodePoco item in items)
+                {
+                    comm.CommandText = @"DELETE FROM [dbo].[System_Language_Codes]
+                                        WHERE [LanguageID] = @LanguageID";
+                    comm.Parameters.AddWithValue("@LanguageID", item.LanguageID);
+
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
 
         public void Update(params SystemLanguageCodePoco[] items)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connstr))
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.Connection = connection;
+                foreach (SystemLanguageCodePoco item in items)
+                {
+                    comm.CommandText = @"UPDATE [dbo].[System_Language_Codes]
+                                       SET [Name] = @Name
+                                          ,[Native_Name] = @Native_Name
+                                       WHERE [LanguageID] = @LanguageID";
+                    comm.Parameters.AddWithValue("@LanguageID", item.LanguageID);
+                    comm.Parameters.AddWithValue("@Name", item.Name);
+                    comm.Parameters.AddWithValue("@Native_Name", item.NativeName);
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
-
+        /* unimplemented interface methods for future iterations */
         public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
         {
             throw new NotImplementedException();
