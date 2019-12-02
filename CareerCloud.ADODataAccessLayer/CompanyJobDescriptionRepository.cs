@@ -33,18 +33,19 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(CompanyJobDescriptionPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"INSERT INTO [dbo].[Company_Jobs_Descriptions]( [Id], [Job], [Job_Name], [Job_Descriptions] )
+                                        VALUES( @Id, @Job, @Job_Name, @Job_Descriptions )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Job_Name", item.JobName);
+                    comm.Parameters.AddWithValue("@Job_Descriptions", item.JobDescriptions);
+                    
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
-
                 }
-
-
             }
-
-
         }
 
         
@@ -97,15 +98,13 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (CompanyJobDescriptionPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"DELETE FROM [dbo].[Company_Jobs_Descriptions]
+                                         WHERE [Id] = @Id";
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
-
                 }
-
-
             }
         }
 
@@ -119,7 +118,14 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (CompanyJobDescriptionPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"UPDATE [dbo].[Company_Jobs_Descriptions]
+                                        SET [Job] = @Job, [Job_Name] = @Job_Name, [Job_Descriptions] = @Job_Descriptions
+                                        WHERE [Id] = @Id";
+
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Job", item.Job);
+                    comm.Parameters.AddWithValue("@Job_Name", item.JobName);
+                    comm.Parameters.AddWithValue("@Job_Descriptions", item.JobDescriptions);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
