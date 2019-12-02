@@ -10,10 +10,10 @@ using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    public class SecurityLoginsRolesRepository : IDataRepository<SecurityLoginsRolePoco>
+    public class SecurityLoginsRoleRepository : IDataRepository<SecurityLoginsRolePoco>
     {
         protected readonly string _connstr;
-        public SecurityLoginsRolesRepository()
+        public SecurityLoginsRoleRepository()
         {
             //create Config Builder
             var config = new ConfigurationBuilder();
