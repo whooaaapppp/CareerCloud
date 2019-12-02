@@ -32,6 +32,14 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach(SecurityRolePoco item in items)
                 {
+                    //prepping the sql query
+                    comm.CommandText = @"INSERT INTO [dbo].[Security_Roles]( [Id], [Role], [Is_Inactive] )
+                                        VALUES( @Id, @Role, @Is_Inactive )";
+
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Role", item.Role);
+                    comm.Parameters.AddWithValue("@Is_Inactive", item.IsInactive);
+
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
@@ -39,9 +47,6 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        
-
         public IList<SecurityRolePoco> GetAll(params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
@@ -85,6 +90,18 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
 
+                foreach(SecurityRolePoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"DELETE FROM [dbo].[Security_Roles]
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+
             }
         }
 
@@ -94,6 +111,23 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (SecurityRolePoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"UPDATE [dbo].[Security_Roles]
+                                        SET [Role] = @Role, [Is_Inactive] = @Is_Inactive
+                                        WHERE [Id] = @Id";
+
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Role", item.Role);
+                    comm.Parameters.AddWithValue("@Is_Inactive", item.IsInactive);
+
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
         /* unimplemented interface methods for future iterations */
