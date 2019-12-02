@@ -47,9 +47,6 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        
-
         public IList<CompanyJobDescriptionPoco> GetAll(params Expression<Func<CompanyJobDescriptionPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
@@ -130,10 +127,7 @@ namespace CareerCloud.ADODataAccessLayer
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
-
                 }
-
-
             }
         }
         /* unimplemented interface methods for future iterations */
