@@ -34,8 +34,14 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(CompanyProfilePoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"SELECT [Id], [Registration_Date], [Company_Website], [Contact_Phone], [Contact_Name], [Company_Logo], [Time_Stamp]
+                                        FROM [dbo].[Company_Profiles]";
                     comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Registration_Date", item.RegistrationDate);
+                    comm.Parameters.AddWithValue("@Company_Website", item.CompanyWebsite);
+                    comm.Parameters.AddWithValue("@Contact_Phone", item.ContactPhone);
+                    comm.Parameters.AddWithValue("@Contact_Name", item.ContactName);
+                    comm.Parameters.AddWithValue("@Company_Logo", item.CompanyLogo);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
@@ -95,8 +101,15 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (CompanyProfilePoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"UPDATE [dbo].[Company_Profiles]
+                                        SET [Registration_Date] = @Registration_Date, [Company_Website] = @Company_Website, [Contact_Phone] = @Contact_Phone, [Contact_Name] = @Contact_Name, [Company_Logo] = @Company_Logo
+                                        WHERE [Id] = @Id";
                     comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Registration_Date", item.RegistrationDate);
+                    comm.Parameters.AddWithValue("@Company_Website", item.CompanyWebsite);
+                    comm.Parameters.AddWithValue("@Contact_Phone", item.ContactPhone);
+                    comm.Parameters.AddWithValue("@Contact_Name", item.ContactName);
+                    comm.Parameters.AddWithValue("@Company_Logo", item.CompanyLogo);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
