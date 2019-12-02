@@ -76,8 +76,9 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (SecurityLoginsRolePoco item in items)
                 {
-                    comm.CommandText = @"";
-                    comm.Parameters.AddWithValue();
+                    comm.CommandText = @"DELETE FROM [dbo].[Security_Logins_Roles]
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
 
                     //rows affected
                     connection.Open();
