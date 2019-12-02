@@ -29,6 +29,11 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach(SecurityRolePoco item in items)
+                {
+
+                }
             }
         }
 
@@ -40,14 +45,34 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Role], [Is_Inactive]
+                                    FROM [dbo].[Security_Roles]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                SecurityRolePoco[] securityRolePocos = new SecurityRolePoco[100];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    SecurityRolePoco securityRolePoco = new SecurityRolePoco();
+                    securityRolePoco.Id = sqlReader.GetGuid(0);
+                    securityRolePoco.Role = sqlReader.GetString(1);
+                    securityRolePoco.IsInactive = sqlReader.GetBoolean(2);
+                    securityRolePocos[index] = securityRolePoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return securityRolePocos.Where(a => a != null).ToList();
+
             }
         }
-
-        
-
         public SecurityRolePoco GetSingle(Expression<Func<SecurityRolePoco, bool>> where, params Expression<Func<SecurityRolePoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
+            IQueryable<SecurityRolePoco> securityRolePocos = GetAll().AsQueryable();
+            /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
+            return securityRolePocos.Where(where).FirstOrDefault();
         }
 
         public void Remove(params SecurityRolePoco[] items)
@@ -56,6 +81,7 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
             }
         }
 
