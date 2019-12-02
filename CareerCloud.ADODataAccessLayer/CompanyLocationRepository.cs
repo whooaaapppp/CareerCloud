@@ -52,20 +52,38 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        
-
         public IList<CompanyLocationPoco> GetAll(params Expression<Func<CompanyLocationPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Company], [Country_Code], [State_Province_Code], [Street_Address], [City_Town], [Zip_Postal_Code], [Time_Stamp]
+                                    FROM [dbo].[Company_Locations]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                CompanyLocationPoco[] companyLocationPocos = new CompanyLocationPoco[1000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    CompanyLocationPoco companyLocationPoco = new CompanyLocationPoco();
+                    companyLocationPoco.Id = sqlReader.GetGuid(0);
+                    companyLocationPoco.Company = sqlReader.GetGuid(1);
+                    companyLocationPoco.CountryCode = sqlReader.GetString(2);
+                    companyLocationPoco.Province = sqlReader.GetString(3);
+                    companyLocationPoco.Street = sqlReader.GetString(4);
+                    companyLocationPoco.City = sqlReader.GetString(5);
+                    companyLocationPoco.PostalCode = sqlReader.GetString(6);
+                    companyLocationPoco.TimeStamp = (byte[])sqlReader[7];
+                    companyLocationPocos[index] = companyLocationPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return companyLocationPocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public CompanyLocationPoco GetSingle(Expression<Func<CompanyLocationPoco, bool>> where, params Expression<Func<CompanyLocationPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
