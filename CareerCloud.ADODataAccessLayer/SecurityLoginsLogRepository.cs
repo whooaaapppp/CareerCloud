@@ -30,6 +30,17 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
 
+                foreach(SecurityLoginsLogPoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"";
+
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
+
 
             }
         }
@@ -49,7 +60,10 @@ namespace CareerCloud.ADODataAccessLayer
 
         public SecurityLoginsLogPoco GetSingle(Expression<Func<SecurityLoginsLogPoco, bool>> where, params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
+            IQueryable<SecurityLoginsLogPoco> securityLoginsLogPocos = GetAll().AsQueryable();
+            /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
+            return securityLoginsLogPocos.Where(where).FirstOrDefault();
         }
 
         public void Remove(params SecurityLoginsLogPoco[] items)
@@ -58,6 +72,17 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (SecurityLoginsLogPoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"";
+
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
 
@@ -67,6 +92,17 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+
+                foreach (SecurityLoginsLogPoco item in items)
+                {
+                    //prepping the sql query
+                    comm.CommandText = @"";
+
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
         }
         /* unimplemented interface methods for future iterations */
