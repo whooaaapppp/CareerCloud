@@ -32,7 +32,10 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach(SecurityRolePoco item in items)
                 {
-
+                    //rows affected
+                    connection.Open();
+                    int rowAffected = comm.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
         }
