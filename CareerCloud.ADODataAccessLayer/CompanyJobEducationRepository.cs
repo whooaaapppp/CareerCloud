@@ -56,7 +56,7 @@ namespace CareerCloud.ADODataAccessLayer
                 connection.Open();
                 int index = 0;
                 SqlDataReader sqlReader = comm.ExecuteReader();
-                CompanyJobEducationPoco[] companyJobEducationPocos = new CompanyJobEducationPoco[1000];
+                CompanyJobEducationPoco[] companyJobEducationPocos = new CompanyJobEducationPoco[10000];
                 //while sqlreader has something to read
                 while (sqlReader.Read())
                 {
