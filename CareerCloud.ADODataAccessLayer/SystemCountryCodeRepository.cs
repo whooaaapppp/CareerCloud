@@ -50,10 +50,27 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Code], [Name]
+                                    FROM [dbo].[System_Country_Codes]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                SystemCountryCodePoco[] systemCountryCodePocos = new SystemCountryCodePoco[100];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    SystemCountryCodePoco systemCountryCodePoco = new SystemCountryCodePoco();
+                    systemCountryCodePoco.Code = sqlReader.GetString(0);
+                    systemCountryCodePoco.Name = sqlReader.GetString(1);
+                    systemCountryCodePocos[index] = systemCountryCodePoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return systemCountryCodePocos.Where(a => a != null).ToList();
+
             }
         }
-
-        
 
         public SystemCountryCodePoco GetSingle(Expression<Func<SystemCountryCodePoco, bool>> where, params Expression<Func<SystemCountryCodePoco, object>>[] navigationProperties)
         {
