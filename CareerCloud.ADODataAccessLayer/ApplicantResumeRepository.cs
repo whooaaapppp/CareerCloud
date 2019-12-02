@@ -65,6 +65,8 @@ namespace CareerCloud.ADODataAccessLayer
                     appResumePoco.Id = sqlReader.GetGuid(0);
                     appResumePoco.Applicant = sqlReader.GetGuid(1);
                     appResumePoco.Resume = sqlReader.GetString(2);
+                    //handling nullables
+                    if(!sqlReader.IsDBNull(3))
                     appResumePoco.LastUpdated = sqlReader.GetDateTime(3);
                     appResumePocos[index] = appResumePoco;
                     index++;
