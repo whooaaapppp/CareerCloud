@@ -97,6 +97,7 @@ namespace CareerCloud.ADODataAccessLayer
                     //prepping the sql query
                     comm.CommandText = @"DELETE FROM [dbo].[Company_Jobs_Descriptions]
                                          WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
