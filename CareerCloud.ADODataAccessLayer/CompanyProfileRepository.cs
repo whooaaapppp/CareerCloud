@@ -82,7 +82,6 @@ namespace CareerCloud.ADODataAccessLayer
                 connection.Close();
                 //return only non-null poco object -> a and pass it to list
                 return companyProfilePocos.Where(a => a != null).ToList();
-
             }
         }
         public CompanyProfilePoco GetSingle(Expression<Func<CompanyProfilePoco, bool>> where, params Expression<Func<CompanyProfilePoco, object>>[] navigationProperties)

@@ -71,10 +71,11 @@ namespace CareerCloud.ADODataAccessLayer
                     companyLocationPoco.Id = sqlReader.GetGuid(0);
                     companyLocationPoco.Company = sqlReader.GetGuid(1);
                     companyLocationPoco.CountryCode = sqlReader.GetString(2);
-                    companyLocationPoco.Province = sqlReader.GetString(3);
-                    companyLocationPoco.Street = sqlReader.GetString(4);
-                    companyLocationPoco.City = sqlReader.GetString(5);
-                    companyLocationPoco.PostalCode = sqlReader.GetString(6);
+                    //handling nullable var entries to empty strings
+                    companyLocationPoco.Province = sqlReader.IsDBNull(3) ? String.Empty : sqlReader.GetString(3);
+                    companyLocationPoco.Street = sqlReader.IsDBNull(4) ? String.Empty : sqlReader.GetString(4);
+                    companyLocationPoco.City = sqlReader.IsDBNull(5) ? String.Empty : sqlReader.GetString(5);
+                    companyLocationPoco.PostalCode = sqlReader.IsDBNull(6) ? String.Empty : sqlReader.GetString(6);
                     companyLocationPoco.TimeStamp = (byte[])sqlReader[7];
                     companyLocationPocos[index] = companyLocationPoco;
                     index++;
