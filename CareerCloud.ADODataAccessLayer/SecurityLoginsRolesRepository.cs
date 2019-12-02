@@ -32,8 +32,11 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach(SecurityLoginsRolePoco item in items)
                 {
-                    comm.CommandText = @"";
-                    comm.Parameters.AddWithValue();
+                    comm.CommandText = @"INSERT INTO [dbo].[Security_Logins_Roles]( [Id], [Login], [Role] )
+                                        VALUES( @Id, @Login, @Role )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Role", item.Role);
                     
                     //rows affected
                     connection.Open();
@@ -93,8 +96,12 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (SecurityLoginsRolePoco item in items)
                 {
-                    comm.CommandText = @"";
-                    comm.Parameters.AddWithValue();
+                    comm.CommandText = @"UPDATE [dbo].[Security_Logins_Roles]
+                                        SET [Login] = @Login, [Role] = @Role
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Role", item.Role);
 
                     //rows affected
                     connection.Open();
