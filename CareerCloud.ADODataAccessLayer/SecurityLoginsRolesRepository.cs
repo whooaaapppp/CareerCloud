@@ -45,20 +45,34 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        
-
         public IList<SecurityLoginsRolePoco> GetAll(params Expression<Func<SecurityLoginsRolePoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Login], [Role], [Time_Stamp]
+                                    FROM [dbo].[Security_Logins_Roles]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                SecurityLoginsRolePoco[] securityLoginsRolePocos = new SecurityLoginsRolePoco[500];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    SecurityLoginsRolePoco securityLoginsRolePoco = new SecurityLoginsRolePoco();
+                    securityLoginsRolePoco.Id = sqlReader.GetGuid(0);
+                    securityLoginsRolePoco.Login = sqlReader.GetGuid(1);
+                    securityLoginsRolePoco.Role = sqlReader.GetGuid(2);
+                    securityLoginsRolePoco.TimeStamp = (byte[])sqlReader[3];
+                    securityLoginsRolePocos[index] = securityLoginsRolePoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return securityLoginsRolePocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public SecurityLoginsRolePoco GetSingle(Expression<Func<SecurityLoginsRolePoco, bool>> where, params Expression<Func<SecurityLoginsRolePoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
