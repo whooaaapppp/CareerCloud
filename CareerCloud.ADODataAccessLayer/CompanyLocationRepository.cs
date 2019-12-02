@@ -68,7 +68,10 @@ namespace CareerCloud.ADODataAccessLayer
 
         public CompanyLocationPoco GetSingle(Expression<Func<CompanyLocationPoco, bool>> where, params Expression<Func<CompanyLocationPoco, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
+            IQueryable<CompanyLocationPoco> companyLocationPocos = GetAll().AsQueryable();
+            /* return first element of a sequence or a default value if the seq contains no elements that satisfy the where predicate */
+            return companyLocationPocos.Where(where).FirstOrDefault();
         }
 
         public void Remove(params CompanyLocationPoco[] items)
