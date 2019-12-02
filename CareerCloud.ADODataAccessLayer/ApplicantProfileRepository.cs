@@ -58,6 +58,8 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Login], [Current_Salary], [Current_Rate], [Currency], [Country_Code], [State_Province_Code], [Street_Address], [City_Town], [Zip_Postal_Code], [Time_Stamp]
+                                    FROM [dbo].[Applicant_Profiles]";
                 connection.Open();
                 int index = 0;
                 SqlDataReader sqlReader = comm.ExecuteReader();
@@ -68,8 +70,8 @@ namespace CareerCloud.ADODataAccessLayer
                     ApplicantProfilePoco appProfilePoco = new ApplicantProfilePoco();
                     appProfilePoco.Id = sqlReader.GetGuid(0);
                     appProfilePoco.Login = sqlReader.GetGuid(1);
-                    appProfilePoco.CurrentSalary = (Decimal?)sqlReader.GetDecimal(2);
-                    appProfilePoco.CurrentRate = (Decimal?)sqlReader.GetDecimal(3);
+                    appProfilePoco.CurrentSalary = sqlReader.GetDecimal(2);
+                    appProfilePoco.CurrentRate = sqlReader.GetDecimal(3);
                     appProfilePoco.Currency = sqlReader.GetString(4);
                     appProfilePoco.Country = sqlReader.GetString(5);
                     appProfilePoco.Province = sqlReader.GetString(6);
@@ -124,6 +126,7 @@ namespace CareerCloud.ADODataAccessLayer
                     comm.CommandText = @"UPDATE [dbo].[Applicant_Profiles]
                                         SET [Login] = @Login, [Current_Salary] = @Current_Salary, [Current_Rate] = @Current_Rate, [Currency] = @Currency, [Country_Code] = @Country_Code, [State_Province_Code] = @State_Province_Code, [Street_Address] = @Street_Address, [City_Town] = @City_Town, [Zip_Postal_Code] = @Zip_Postal_Code
                                         WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
                     comm.Parameters.AddWithValue("@Login", item.Login);
                     comm.Parameters.AddWithValue("@Current_Salary", item.CurrentSalary);
                     comm.Parameters.AddWithValue("@Current_Rate", item.CurrentRate);
