@@ -34,13 +34,13 @@ namespace CareerCloud.ADODataAccessLayer
                 {
                     //prepping the sql query
                     comm.CommandText = @"INSERT INTO [dbo].[Security_Logins_Log]( [Id], [Login], [Source_IP], [Logon_Date], [Is_Succesful] )
-                                        VALUES( @Id, @Login, @Source_IP, @Logon_Date, @Is_Succesful )";
+                                        VALUES( @Id, @Login, @Source_IP, @Logon_Date, @Is_Succesful)";
 
                     comm.Parameters.AddWithValue("@Id", item.Id);
                     comm.Parameters.AddWithValue("@Login", item.Login);
                     comm.Parameters.AddWithValue("@Source_IP", item.SourceIP);
                     comm.Parameters.AddWithValue("@Logon_Date", item.LogonDate);
-                    comm.Parameters.AddWithValue("@Is_Successful", item.IsSuccesful);
+                    comm.Parameters.AddWithValue("@Is_Succesful", item.IsSuccesful);
 
                     //rows affected
                     connection.Open();
@@ -127,7 +127,7 @@ namespace CareerCloud.ADODataAccessLayer
                     comm.Parameters.AddWithValue("@Login", item.Login);
                     comm.Parameters.AddWithValue("@Source_IP", item.SourceIP);
                     comm.Parameters.AddWithValue("@Logon_Date", item.LogonDate);
-                    comm.Parameters.AddWithValue("@Is_Successful", item.IsSuccesful);
+                    comm.Parameters.AddWithValue("@Is_Succesful", item.IsSuccesful);
 
                     //rows affected
                     connection.Open();
