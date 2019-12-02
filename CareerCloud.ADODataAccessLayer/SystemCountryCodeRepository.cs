@@ -33,7 +33,10 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach(SystemCountryCodePoco item in items)
                 {
-
+                    comm.CommandText = @"INSERT INTO [dbo].[System_Country_Codes]( [Code], [Name] )
+                                        VALUES( @Code, @Name )";
+                    comm.Parameters.AddWithValue("@Code", item.Code);
+                    comm.Parameters.AddWithValue("@Name", item.Name);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
@@ -41,9 +44,6 @@ namespace CareerCloud.ADODataAccessLayer
                 }
             }
         }
-
-        
-
         public IList<SystemCountryCodePoco> GetAll(params Expression<Func<SystemCountryCodePoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
@@ -72,7 +72,9 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (SystemCountryCodePoco item in items)
                 {
-
+                    comm.CommandText = @"DELETE FROM [dbo].[System_Country_Codes]
+                                        WHERE [Code] = @Code";
+                    comm.Parameters.AddWithValue("@Code", item.Code);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
@@ -90,7 +92,11 @@ namespace CareerCloud.ADODataAccessLayer
 
                 foreach (SystemCountryCodePoco item in items)
                 {
-
+                    comm.CommandText = @"UPDATE [dbo].[System_Country_Codes]
+                                        SET [Name] = @Name
+                                        WHERE [Code] = @Code";
+                    comm.Parameters.AddWithValue("@Code", item.Code);
+                    comm.Parameters.AddWithValue("@Name", item.Name);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
