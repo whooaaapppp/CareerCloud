@@ -46,7 +46,7 @@ namespace CareerCloud.ADODataAccessLayer
                     comm.Parameters.AddWithValue("@Phone_Number", item.PhoneNumber);
                     comm.Parameters.AddWithValue("@Full_Name", item.FullName);
                     comm.Parameters.AddWithValue("@Force_Change_Password", item.ForceChangePassword);
-                    comm.Parameters.AddWithValue("@Preffered_Language", item.PrefferredLanguage);
+                    comm.Parameters.AddWithValue("@Prefferred_Language", item.PrefferredLanguage);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
@@ -153,7 +153,7 @@ namespace CareerCloud.ADODataAccessLayer
                     comm.Parameters.AddWithValue("@Phone_Number", item.PhoneNumber);
                     comm.Parameters.AddWithValue("@Full_Name", item.FullName);
                     comm.Parameters.AddWithValue("@Force_Change_Password", item.ForceChangePassword);
-                    comm.Parameters.AddWithValue("@Preffered_Language", item.PrefferredLanguage);
+                    comm.Parameters.AddWithValue("@Prefferred_Language", item.PrefferredLanguage);
 
 
                     //rows affected
