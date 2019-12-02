@@ -53,11 +53,28 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [LanguageID], [Name], [Native_Name]
+                FROM [dbo].[System_Language_Codes]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                SystemLanguageCodePoco[] systemLanguageCodePocos = new SystemLanguageCodePoco[100];
+                //while sql reader has something to read
+                while (sqlReader.Read())
+                {
+                    SystemLanguageCodePoco systemLanguageCodePoco = new SystemLanguageCodePoco();
+                    systemLanguageCodePoco.LanguageID = sqlReader.GetString(0);
+                    systemLanguageCodePoco.Name = sqlReader.GetString(1);
+                    systemLanguageCodePoco.NativeName = sqlReader.GetString(2);
+                    systemLanguageCodePocos[index] = systemLanguageCodePoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return systemLanguageCodePocos.Where(a => a != null).ToList();
+
             }
         }
-
-        
-
         public SystemLanguageCodePoco GetSingle(Expression<Func<SystemLanguageCodePoco, bool>> where, params Expression<Func<SystemLanguageCodePoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
