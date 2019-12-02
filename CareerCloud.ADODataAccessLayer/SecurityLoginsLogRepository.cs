@@ -33,20 +33,23 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach(SecurityLoginsLogPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"INSERT INTO [dbo].[Security_Logins_Log]( [Id], [Login], [Source_IP], [Logon_Date], [Is_Succesful] )
+                                        VALUES( @Id, @Login, @Source_IP, @Logon_Date, @Is_Succesful )";
+
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Source_IP", item.SourceIP);
+                    comm.Parameters.AddWithValue("@Logon_Date", item.LogonDate);
+                    comm.Parameters.AddWithValue("@Is_Successful", item.IsSuccesful);
 
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
                     connection.Close();
                 }
-
-
             }
         }
-
         
-
         public IList<SecurityLoginsLogPoco> GetAll(params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)
         {
             using (SqlConnection connection = new SqlConnection(_connstr))
@@ -55,9 +58,6 @@ namespace CareerCloud.ADODataAccessLayer
                 comm.Connection = connection;
             }
         }
-
-       
-
         public SecurityLoginsLogPoco GetSingle(Expression<Func<SecurityLoginsLogPoco, bool>> where, params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
@@ -76,7 +76,9 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (SecurityLoginsLogPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"DELETE FROM [dbo].[Security_Logins_Log]
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
 
                     //rows affected
                     connection.Open();
@@ -96,7 +98,14 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (SecurityLoginsLogPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @"";
+                    comm.CommandText = @"UPDATE [dbo].[Security_Logins_Log]
+                                        SET [Login] = @Login, [Source_IP] = @Source_IP, [Logon_Date] = @Logon_Date, [Is_Succesful] = @Is_Succesful
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Source_IP", item.SourceIP);
+                    comm.Parameters.AddWithValue("@Logon_Date", item.LogonDate);
+                    comm.Parameters.AddWithValue("@Is_Successful", item.IsSuccesful);
 
                     //rows affected
                     connection.Open();
