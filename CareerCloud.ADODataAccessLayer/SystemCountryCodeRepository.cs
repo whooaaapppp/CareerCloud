@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace CareerCloud.ADODataAccessLayer
 {
-    protected readonly string _connstr;
+    
     public class SystemCountryCodeRepository : IDataRepository<SystemCountryCodePoco>
     {
         protected readonly string _connstr;
