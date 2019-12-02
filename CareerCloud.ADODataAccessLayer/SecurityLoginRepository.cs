@@ -63,14 +63,44 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
-
-                
-
+                comm.CommandText = @"SELECT [Id], [Login], [Password], [Created_Date], [Password_Update_Date], [Agreement_Accepted_Date], [Is_Locked], [Is_Inactive], [Email_Address], [Phone_Number], [Full_Name], [Force_Change_Password], [Prefferred_Language], [Time_Stamp]
+                                    FROM [dbo].[Security_Logins]";
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                SecurityLoginPoco[] securityLoginPocos = new SecurityLoginPoco[500];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    SecurityLoginPoco securityLoginPoco = new SecurityLoginPoco();
+                    securityLoginPoco.Id = sqlReader.GetGuid(0);
+                    securityLoginPoco.Login = sqlReader.GetString(1);
+                    securityLoginPoco.Password = sqlReader.GetString(2);
+                    securityLoginPoco.Created = sqlReader.GetDateTime(3);
+                    if (!sqlReader.IsDBNull(4))
+                    {
+                        securityLoginPoco.PasswordUpdate = sqlReader.GetDateTime(4);
+                    }
+                    if (!sqlReader.IsDBNull(5))
+                    {
+                        securityLoginPoco.AgreementAccepted = sqlReader.GetDateTime(5);
+                    }
+                    securityLoginPoco.IsLocked = sqlReader.GetBoolean(6);
+                    securityLoginPoco.IsInactive = sqlReader.GetBoolean(7);
+                    securityLoginPoco.EmailAddress = sqlReader.GetString(8);
+                    securityLoginPoco.PhoneNumber = sqlReader.IsDBNull(9) ? String.Empty : sqlReader.GetString(9);
+                    securityLoginPoco.FullName = sqlReader.IsDBNull(10) ? String.Empty : sqlReader.GetString(10);
+                    securityLoginPoco.ForceChangePassword = sqlReader.GetBoolean(11);
+                    securityLoginPoco.PrefferredLanguage = sqlReader.IsDBNull(12) ? String.Empty : sqlReader.GetString(12);
+                    securityLoginPoco.TimeStamp = (byte[])sqlReader[13];
+                    securityLoginPocos[index] = securityLoginPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return securityLoginPocos.Where(a => a != null).ToList();
             }
         }
-
-        
-
         public SecurityLoginPoco GetSingle(Expression<Func<SecurityLoginPoco, bool>> where, params Expression<Func<SecurityLoginPoco, object>>[] navigationProperties)
         {
             /* https://docs.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1?view=netframework-4.8 */
