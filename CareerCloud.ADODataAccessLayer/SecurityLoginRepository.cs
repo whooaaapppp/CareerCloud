@@ -32,8 +32,21 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (SecurityLoginPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @""
-                    comm.Parameters.AddWithValue();
+                    comm.CommandText = @"INSERT INTO [dbo].[Security_Logins]( [Id], [Login], [Password], [Created_Date], [Password_Update_Date], [Agreement_Accepted_Date], [Is_Locked], [Is_Inactive], [Email_Address], [Phone_Number], [Full_Name], [Force_Change_Password], [Prefferred_Language] )
+                                        VALUES( @Id, @Login, @Password, @Created_Date, @Password_Update_Date, @Agreement_Accepted_Date, @Is_Locked, @Is_Inactive, @Email_Address, @Phone_Number, @Full_Name, @Force_Change_Password, @Prefferred_Language )";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Password", item.Password);
+                    comm.Parameters.AddWithValue("@Created_Date", item.Created);
+                    comm.Parameters.AddWithValue("@Password_Update_Date", item.PasswordUpdate);
+                    comm.Parameters.AddWithValue("@Agreement_Accepted_Date", item.AgreementAccepted);
+                    comm.Parameters.AddWithValue("@Is_Locked", item.IsLocked);
+                    comm.Parameters.AddWithValue("@Is_Inactive", item.IsInactive);
+                    comm.Parameters.AddWithValue("@Email_Address", item.EmailAddress);
+                    comm.Parameters.AddWithValue("@Phone_Number", item.PhoneNumber);
+                    comm.Parameters.AddWithValue("@Full_Name", item.FullName);
+                    comm.Parameters.AddWithValue("@Force_Change_Password", item.ForceChangePassword);
+                    comm.Parameters.AddWithValue("@Preffered_Language", item.PrefferredLanguage);
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
@@ -95,8 +108,24 @@ namespace CareerCloud.ADODataAccessLayer
                 foreach (SecurityLoginPoco item in items)
                 {
                     //prepping the sql query
-                    comm.CommandText = @""
-                    comm.Parameters.AddWithValue();
+                    comm.CommandText = @"UPDATE [dbo].[Security_Logins]
+                                        SET [Login] = @Login, [Password] = @Password, [Created_Date] = @Created_Date, [Password_Update_Date] = @Password_Update_Date, [Agreement_Accepted_Date] = @Agreement_Accepted_Date, [Is_Locked] = @Is_Locked, [Is_Inactive] = @Is_Inactive, [Email_Address] = @Email_Address, [Phone_Number] = @Phone_Number, [Full_Name] = @Full_Name, [Force_Change_Password] = @Force_Change_Password, [Prefferred_Language] = @Prefferred_Language
+                                        WHERE [Id] = @Id";
+                    comm.Parameters.AddWithValue("@Id", item.Id);
+                    comm.Parameters.AddWithValue("@Login", item.Login);
+                    comm.Parameters.AddWithValue("@Password", item.Password);
+                    comm.Parameters.AddWithValue("@Created_Date", item.Created);
+                    comm.Parameters.AddWithValue("@Password_Update_Date", item.PasswordUpdate);
+                    comm.Parameters.AddWithValue("@Agreement_Accepted_Date", item.AgreementAccepted);
+                    comm.Parameters.AddWithValue("@Is_Locked", item.IsLocked);
+                    comm.Parameters.AddWithValue("@Is_Inactive", item.IsInactive);
+                    comm.Parameters.AddWithValue("@Email_Address", item.EmailAddress);
+                    comm.Parameters.AddWithValue("@Phone_Number", item.PhoneNumber);
+                    comm.Parameters.AddWithValue("@Full_Name", item.FullName);
+                    comm.Parameters.AddWithValue("@Force_Change_Password", item.ForceChangePassword);
+                    comm.Parameters.AddWithValue("@Preffered_Language", item.PrefferredLanguage);
+
+
                     //rows affected
                     connection.Open();
                     int rowAffected = comm.ExecuteNonQuery();
