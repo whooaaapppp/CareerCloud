@@ -56,6 +56,28 @@ namespace CareerCloud.ADODataAccessLayer
             {
                 SqlCommand comm = new SqlCommand();
                 comm.Connection = connection;
+                comm.CommandText = @"SELECT [Id], [Login], [Source_IP], [Logon_Date], [Is_Succesful]
+                                    FROM [dbo].[Security_Logins_Log]";
+
+                connection.Open();
+                int index = 0;
+                SqlDataReader sqlReader = comm.ExecuteReader();
+                SecurityLoginsLogPoco[] securityLoginsLogPocos = new SecurityLoginsLogPoco[10000];
+                //while sqlreader has something to read
+                while (sqlReader.Read())
+                {
+                    SecurityLoginsLogPoco securityLoginsLogPoco = new SecurityLoginsLogPoco();
+                    securityLoginsLogPoco.Id = sqlReader.GetGuid(0);
+                    securityLoginsLogPoco.Login = sqlReader.GetGuid(1);
+                    securityLoginsLogPoco.SourceIP = sqlReader.GetString(2);
+                    securityLoginsLogPoco.LogonDate = sqlReader.GetDateTime(3);
+                    securityLoginsLogPoco.IsSuccesful = sqlReader.GetBoolean(4);
+                    securityLoginsLogPocos[index] = securityLoginsLogPoco;
+                    index++;
+                }
+                connection.Close();
+                //return only non-null poco object -> a and pass it to list
+                return securityLoginsLogPocos.Where(a => a != null).ToList();
             }
         }
         public SecurityLoginsLogPoco GetSingle(Expression<Func<SecurityLoginsLogPoco, bool>> where, params Expression<Func<SecurityLoginsLogPoco, object>>[] navigationProperties)
