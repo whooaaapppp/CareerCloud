@@ -72,7 +72,8 @@ namespace CareerCloud.ADODataAccessLayer
                     appEduPoco.Major = sqlReader.GetString(2);
                     appEduPoco.CertificateDiploma = sqlReader.GetString(3);
                     if (!sqlReader.IsDBNull(4))
-                        appEduPoco.StartDate = sqlReader.GetDateTime(4);
+                    //appEduPoco.StartDate = sqlReader.IsDBNull(4) ? (DateTime?) null : sqlReader.GetDateTime(4);
+                        appEduPoco.StartDate = (DateTime?)sqlReader.GetDateTime(4);
                     if (!sqlReader.IsDBNull(5))
                         appEduPoco.CompletionDate = (DateTime?)sqlReader.GetDateTime(5);
                     if (!sqlReader.IsDBNull(6))
