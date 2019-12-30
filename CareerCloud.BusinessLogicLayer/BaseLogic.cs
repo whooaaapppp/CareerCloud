@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace CareerCloud.BusinessLogicLayer
 {
+	//constraint has to inherit from IPoco
 	public abstract class BaseLogic<TPoco> where TPoco : IPoco
 	{
 		protected IDataRepository<TPoco> _repository;
