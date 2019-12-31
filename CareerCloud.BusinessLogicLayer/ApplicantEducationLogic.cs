@@ -21,21 +21,21 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if (string.IsNullOrEmpty(poco.Major))
                 {
-                    exceptions.Add(new ValidationException(107, "Major field blank. Please enter Major"));
+                    exceptions.Add(new ValidationException(107, $"Major field blank. Please enter Major"));
                 }
                 else if (poco.Major.Length < 3)
                 {
-                    exceptions.Add(new ValidationException(107, "Major is less than 3 characters."));
+                    exceptions.Add(new ValidationException(107, $"Major {poco.Major} is less than 3 characters."));
                 }
 
                 if (poco.StartDate > DateTime.Now)
                 {
-                    exceptions.Add(new ValidationException(108, "Start date is greater than today!"));
+                    exceptions.Add(new ValidationException(108, $"Start date {poco.StartDate} is more than today's date!"));
                 }
 
                 if (poco.CompletionDate < poco.StartDate)
                 {
-                    exceptions.Add(new ValidationException(109, "Completion date cannot be earlier than start date!"));
+                    exceptions.Add(new ValidationException(109, $"Completion date {poco.CompletionDate} cannot be earlier than start date {poco.StartDate}!"));
                 }
             }
             //check exception count 
