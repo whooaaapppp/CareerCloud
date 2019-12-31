@@ -5,7 +5,7 @@ using CareerCloud.Pocos;
 using CareerCloud.DataAccessLayer;
 using System.Linq;
 
-namespace CareerCloud.BusinessLogicLayer
+namespace CareerCloud.BusinessLogicLayer 
 {
 	//constraint has to inherit from IPoco
 	public abstract class BaseLogic<TPoco> where TPoco : IPoco
