@@ -22,11 +22,11 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if (string.IsNullOrEmpty(poco.JobName))
                 {
-                    exceptions.Add(new ValidationException(300, "Job Name cannot be empty. Please enter Job Name."));
+                    exceptions.Add(new ValidationException(300, $"Job Name {poco.JobName} cannot be empty. Please enter Job Name."));
                 }
                 if (string.IsNullOrEmpty(poco.JobDescriptions))
                 {
-                    exceptions.Add(new ValidationException(301, "Job Description cannot be empty. Please enter Job Description."));
+                    exceptions.Add(new ValidationException(301, $"Job Description {poco.JobDescriptions} cannot be empty. Please enter Job Description."));
                 }
             }
 

@@ -21,19 +21,19 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if(poco.StartMonth > 12)
                 {
-                    exceptions.Add(new ValidationException(101, "Oops there is no 13th month!"));
+                    exceptions.Add(new ValidationException(101, $"This {poco.StartMonth} is beyond the 12 month standard!"));
                 }
                 if (poco.EndMonth > 12)
                 {
-                    exceptions.Add(new ValidationException(102, "Oops there is no 13th month!"));
+                    exceptions.Add(new ValidationException(102, $"This {poco.EndMonth} is beyond the 12 month standard!"));
                 }
                 if (poco.StartYear < 1900)
                 {
-                    exceptions.Add(new ValidationException(103, "Start Year cannot be less than 1900"));
+                    exceptions.Add(new ValidationException(103, $"Uh oh! {poco.StartYear} is before 1900"));
                 }
                 if (poco.EndYear < poco.StartYear)
                 {
-                    exceptions.Add(new ValidationException(104, "End Year cannot be less than Start Year"));
+                    exceptions.Add(new ValidationException(104, $"You shall not pass! {poco.EndYear} End Year is lesser than {poco.StartYear} Start Year!"));
                 }
             }
 

@@ -21,11 +21,11 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if(poco.CurrentSalary < 0)
                 {
-                    exceptions.Add(new ValidationException(111, "CurrentSalary cannot be negative!"));
+                    exceptions.Add(new ValidationException(111, $"Current Salary {poco.CurrentSalary} cannot be negative. It means they have no money to pay you."));
                 }
                 if (poco.CurrentRate < 0)
                 {
-                    exceptions.Add(new ValidationException(112, "CurrentRate cannot be negative!"));
+                    exceptions.Add(new ValidationException(112, $"Current Rate {poco.CurrentRate} cannot be negative, nobody wants that do you?"));
                 }
             }
 

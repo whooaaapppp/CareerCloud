@@ -22,16 +22,16 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if (string.IsNullOrEmpty(poco.Major))
                 {
-                    exceptions.Add(new ValidationException(200, "Major field blank. Please enter Major"));
+                    exceptions.Add(new ValidationException(200, $"Major {poco.Major} field blank. Please enter Major"));
                 }
                 else if (poco.Major.Length < 2)
                 {
-                    exceptions.Add(new ValidationException(200, "Major must be at least 2 characters."));
+                    exceptions.Add(new ValidationException(200, $"Major {poco.Major} must be at least 2 characters."));
                 }
 
                 if (poco.Importance < 0)
                 {
-                    exceptions.Add(new ValidationException(201, "Importance cannot be less than 0"));
+                    exceptions.Add(new ValidationException(201, $"Importance {poco.Importance} cannot be less than 0"));
                 }
 
             }

@@ -23,15 +23,15 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if (string.IsNullOrEmpty(poco.LanguageID))
                 {
-                    exceptions.Add(new ValidationException(1000, "LanguageID cannot be empty!"));
+                    exceptions.Add(new ValidationException(1000, $"Language ID {poco.LanguageID} cannot be empty!"));
                 }
                 if (string.IsNullOrEmpty(poco.Name))
                 {
-                    exceptions.Add(new ValidationException(1001, "Name cannot be empty!"));
+                    exceptions.Add(new ValidationException(1001, $"Name {poco.Name} cannot be empty!"));
                 }
                 if (string.IsNullOrEmpty(poco.NativeName))
                 {
-                    exceptions.Add(new ValidationException(1002, "NativeName cannot be empty!"));
+                    exceptions.Add(new ValidationException(1002, $"Native Name {poco.NativeName} cannot be empty!"));
                 }
             }
             //check exception count

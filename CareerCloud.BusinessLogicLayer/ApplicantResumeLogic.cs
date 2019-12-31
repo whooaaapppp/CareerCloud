@@ -22,7 +22,7 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if (string.IsNullOrEmpty(poco.Resume))
                 {
-                    exceptions.Add(new ValidationException(113, "Resume cannot be empty. Please supply resume"));
+                    exceptions.Add(new ValidationException(113, $"How can you apply if you don't have Resume {poco.Resume}!"));
                 }
             }
 
