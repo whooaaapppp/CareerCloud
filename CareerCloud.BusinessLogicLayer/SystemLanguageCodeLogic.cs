@@ -25,12 +25,10 @@ namespace CareerCloud.BusinessLogicLayer
                 {
                     exceptions.Add(new ValidationException(1000, "LanguageID cannot be empty!"));
                 }
-
                 if (string.IsNullOrEmpty(poco.Name))
                 {
                     exceptions.Add(new ValidationException(1001, "Name cannot be empty!"));
                 }
-
                 if (string.IsNullOrEmpty(poco.NativeName))
                 {
                     exceptions.Add(new ValidationException(1002, "NativeName cannot be empty!"));
@@ -61,7 +59,7 @@ namespace CareerCloud.BusinessLogicLayer
         {
             //make sure poco is clean, doesn't have exceptions
             Verify(pocos);
-            _repository.Add(pocos);
+            _repository.Update(pocos);
         }
         public void Delete(SystemLanguageCodePoco[] pocos)
         {
