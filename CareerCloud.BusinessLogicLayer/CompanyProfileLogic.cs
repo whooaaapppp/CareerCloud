@@ -25,6 +25,7 @@ namespace CareerCloud.BusinessLogicLayer
                 {
                     exceptions.Add(new ValidationException(600, $"Company Website {poco.CompanyWebsite} field is empty."));
                 }
+                //regex101.com saves the day
                 else if (!Regex.IsMatch(poco.CompanyWebsite, @"\A(?:(http)?s?:\/\/)?(www.)?([a-z0-9!]+\-?[a-z0-9!]+)+\.(ca|biz|com)\Z", RegexOptions.IgnoreCase))
                 {
                     exceptions.Add(new ValidationException(600, $"Company Website {poco.CompanyWebsite} is not a valid website address format."));
