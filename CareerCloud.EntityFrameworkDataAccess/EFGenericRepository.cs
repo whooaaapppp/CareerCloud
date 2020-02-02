@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CareerCloud.EntityFrameworkDataAccess
 {
-    class EFGenericRepository<T> : IDataRepository<T> where T : class
+    public class EFGenericRepository<T> : IDataRepository<T> where T : class
     {
         private CareerCloudContext _context;
         
@@ -24,6 +24,8 @@ namespace CareerCloud.EntityFrameworkDataAccess
             {
                 _context.Entry(item).State = EntityState.Added;
             }
+            //telling EF savechanges task 
+            _context.SaveChangesAsync();
         }
 
         //future iterations
@@ -53,11 +55,18 @@ namespace CareerCloud.EntityFrameworkDataAccess
             {
                 _context.Entry(item).State = EntityState.Deleted;
             }
+            //telling EF savechanges task 
+            _context.SaveChangesAsync();
         }
 
         public void Update(params T[] items)
         {
-            throw new NotImplementedException();
+            foreach (T item in items)
+            {
+                _context.Entry(item).State = EntityState.Modified;
+            }
+            //telling EF savechanges task 
+            _context.SaveChangesAsync();
         }
     }
 }

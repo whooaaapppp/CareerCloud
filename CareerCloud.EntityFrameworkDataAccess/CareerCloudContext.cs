@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CareerCloud.EntityFrameworkDataAccess
 {
-    class CareerCloudContext : DbContext
+    public class CareerCloudContext : DbContext
     {
         public DbSet<ApplicantEducationPoco> ApplicantEducations { get; set; }
         
