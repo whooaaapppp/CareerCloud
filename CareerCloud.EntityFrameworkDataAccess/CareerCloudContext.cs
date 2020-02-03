@@ -90,6 +90,28 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .WithOne(x => x.ApplicantProfiles)
                 .HasForeignKey(x => x.Applicant);
 
+            modelBuilder.Entity<CompanyJobPoco>()
+                .HasMany(x => x.CompanyJobEducations)
+                .WithOne(x => x.CompanyJobs)
+                .HasForeignKey(x => x.Job);
+
+            modelBuilder.Entity<CompanyJobPoco>()
+                .HasMany(x => x.CompanyJobsDescriptions)
+                .WithOne(x => x.CompanyJobs)
+                .HasForeignKey(x => x.Job);
+
+            modelBuilder.Entity<CompanyJobPoco>()
+                .HasMany(x => x.CompanyJobSkills)
+                .WithOne(x => x.CompanyJobs)
+                .HasForeignKey(x => x.Job);
+
+            modelBuilder.Entity<CompanyJobPoco>()
+                .HasMany(x => x.ApplicantJobApplications)
+                .WithOne(x => x.CompanyJobs)
+                .HasForeignKey(x => x.Job);
+
+
+
 
 
 
@@ -133,7 +155,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public DbSet<ApplicantSkillPoco> ApplicantSkills { get; set; }
         public DbSet<ApplicantWorkHistoryPoco> ApplicantWorkHistory { get; set; }
         DbSet<CompanyDescriptionPoco> CompanyDescriptions { get; set; }
-        public DbSet<CompanyJobDescriptionPoco> CompanyJobDescriptions { get; set; }
+        public DbSet<CompanyJobDescriptionPoco> CompanyJobsDescriptions { get; set; }
         public DbSet<CompanyJobPoco> CompanyJobs { get; set; }
         public DbSet<CompanyJobSkillPoco> CompanyJobSkills { get; set; }
         public DbSet<CompanyLocationPoco> CompanyLocations { get; set; }

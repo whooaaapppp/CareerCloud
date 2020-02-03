@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,12 @@ namespace CareerCloud.Pocos
         public bool IsCompanyHidden { get; set; }
         [Column("Time_Stamp")]
         public Byte[] TimeStamp { get; set; }
+
+        public virtual ICollection<CompanyJobEducationPoco> CompanyJobEducations { get; set; }
+        public virtual ICollection<CompanyJobDescriptionPoco> CompanyJobsDescriptions { get; set; }
+        public virtual ICollection<ApplicantJobApplicationPoco> ApplicantJobApplications { get; set; }
+        public virtual ICollection<CompanyJobSkillPoco> CompanyJobSkills { get; set; }
+        public virtual CompanyProfilePoco CompanyProfiles { get; set; }
 
     }
 }

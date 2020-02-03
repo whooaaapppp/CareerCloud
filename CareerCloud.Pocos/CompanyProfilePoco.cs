@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,6 +22,8 @@ namespace CareerCloud.Pocos
         public Byte[] CompanyLogo { get; set; }
         [Column("Time_Stamp")]
         public Byte[] TimeStamp { get; set; }
+
+        public virtual ICollection<CompanyJobPoco> CompanyJobs { get; set; }
 
     }
 }
