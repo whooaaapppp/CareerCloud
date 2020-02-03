@@ -34,32 +34,40 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .HasMany(x => x.CompanyDescriptions)
                 .WithOne(x => x.SystemLanguageCodes)
                 .HasForeignKey(x => x.LanguageId);
-            //.IsRequired(true);
-
 
             modelBuilder.Entity<SystemCountryCodePoco>()
                 .HasMany(x => x.ApplicantWorkHistory)
                 .WithOne(x => x.SystemCountryCodes)
-                .HasForeignKey(x => x.CountryCode);
-            //.IsRequired(true);
+                .HasForeignKey(x => x.CountryCode);            
 
             modelBuilder.Entity<SystemCountryCodePoco>()
                 .HasMany(x => x.ApplicantProfiles)
                 .WithOne(x => x.SystemCountryCodes)
-                .HasForeignKey(x => x.Country)
-            //.IsRequired();
+                .HasForeignKey(x => x.Country);            
 
             modelBuilder.Entity<SecurityRolePoco>()
                 .HasMany(x => x.SecurityLoginsRoles)
                 .WithOne(x => x.SecurityRoles)
                 .HasForeignKey(x => x.Id);
-            //.IsRequired(true);
+           
+            modelBuilder.Entity<SecurityLoginPoco>()
+                .HasMany(x => x.SecurityLoginsLog)
+                .WithOne(x => x.SecurityLogins)
+                .HasForeignKey(x=>x.Login);
 
             modelBuilder.Entity<SecurityLoginPoco>()
-                .HasMany()
-                .WithOne()
-                .HasForeignKey();
-            
+                .HasMany(x=> x.ApplicantProfiles)
+                .WithOne(x=> x.SecurityLogins)
+                .HasForeignKey(x=>x.Login);
+
+            modelBuilder.Entity<SecurityLoginPoco>()
+                .HasMany(x => x.SecurityLoginsRoles)
+                .WithOne(x => x.SecurityLogins)
+                .HasForeignKey(x => x.Login);
+
+
+
+
 
 
 

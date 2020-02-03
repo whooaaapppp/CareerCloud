@@ -16,6 +16,7 @@ namespace CareerCloud.Pocos
         public Byte[] TimeStamp { get; set; }
 
         public virtual SecurityRolePoco SecurityRoles { get; set; }
+        public virtual SecurityLoginPoco SecurityLogins { get; set; }
 
     }
 }
