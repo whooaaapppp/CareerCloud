@@ -11,7 +11,6 @@ namespace CareerCloud.EntityFrameworkDataAccess
     public class CareerCloudContext : DbContext
     {
         
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //create Config Builder
@@ -32,102 +31,118 @@ namespace CareerCloud.EntityFrameworkDataAccess
             modelBuilder.Entity<SystemLanguageCodePoco>()
                 .HasMany(x => x.CompanyDescriptions)
                 .WithOne(x => x.SystemLanguageCodes)
-                .HasForeignKey(x => x.LanguageId);
+                .HasForeignKey(x => x.LanguageId)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region SystemCountryCodePoco modelBuilder
             modelBuilder.Entity<SystemCountryCodePoco>()
                 .HasMany(x => x.ApplicantWorkHistory)
                 .WithOne(x => x.SystemCountryCodes)
-                .HasForeignKey(x => x.CountryCode);            
-
+                .HasForeignKey(x => x.CountryCode)
+                .OnDelete(DeleteBehavior.Cascade); 
             modelBuilder.Entity<SystemCountryCodePoco>()
                 .HasMany(x => x.ApplicantProfiles)
                 .WithOne(x => x.SystemCountryCodes)
-                .HasForeignKey(x => x.Country);
+                .HasForeignKey(x => x.Country)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region SecurityRolePoco modelBuilder
             modelBuilder.Entity<SecurityRolePoco>()
                 .HasMany(x => x.SecurityLoginsRoles)
                 .WithOne(x => x.SecurityRoles)
-                .HasForeignKey(x => x.Id);
+                .HasForeignKey(x => x.Id)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region SecurityLoginPoco modelBuilder
             modelBuilder.Entity<SecurityLoginPoco>()
                 .HasMany(x => x.SecurityLoginsLog)
                 .WithOne(x => x.SecurityLogins)
-                .HasForeignKey(x=>x.Login);
-
+                .HasForeignKey(x=>x.Login)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<SecurityLoginPoco>()
                 .HasMany(x=> x.ApplicantProfiles)
                 .WithOne(x=> x.SecurityLogins)
-                .HasForeignKey(x=>x.Login);
-
+                .HasForeignKey(x=>x.Login)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<SecurityLoginPoco>()
                 .HasMany(x => x.SecurityLoginsRoles)
                 .WithOne(x => x.SecurityLogins)
-                .HasForeignKey(x => x.Login);
+                .HasForeignKey(x => x.Login)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region ApplicantProfilePoco
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasMany(x => x.ApplicantSkills)
                 .WithOne(x => x.ApplicantProfiles)
-                .HasForeignKey(x => x.Applicant);
-
+                .HasForeignKey(x => x.Applicant)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasMany(x => x.ApplicantResumes)
                 .WithOne(x => x.ApplicantProfiles)
-                .HasForeignKey(x => x.Applicant);
-
+                .HasForeignKey(x => x.Applicant)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasMany(x => x.ApplicantWorkHistory)
                 .WithOne(x => x.ApplicantProfiles)
-                .HasForeignKey(x => x.Applicant);
-
+                .HasForeignKey(x => x.Applicant)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasMany(x => x.ApplicantJobApplications)
                 .WithOne(x => x.ApplicantProfiles)
-                .HasForeignKey(x => x.Applicant);
-
+                .HasForeignKey(x => x.Applicant)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasMany(x => x.ApplicantEducations)
                 .WithOne(x => x.ApplicantProfiles)
-                .HasForeignKey(x => x.Applicant);
+                .HasForeignKey(x => x.Applicant)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region CompanyJobPoco modelBuilder
             modelBuilder.Entity<CompanyJobPoco>()
                 .HasMany(x => x.CompanyJobEducations)
                 .WithOne(x => x.CompanyJobs)
-                .HasForeignKey(x => x.Job);
-
+                .HasForeignKey(x => x.Job)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<CompanyJobPoco>()
                 .HasMany(x => x.CompanyJobsDescriptions)
                 .WithOne(x => x.CompanyJobs)
-                .HasForeignKey(x => x.Job);
-
+                .HasForeignKey(x => x.Job)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<CompanyJobPoco>()
                 .HasMany(x => x.CompanyJobSkills)
                 .WithOne(x => x.CompanyJobs)
-                .HasForeignKey(x => x.Job);
-
+                .HasForeignKey(x => x.Job)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<CompanyJobPoco>()
                 .HasMany(x => x.ApplicantJobApplications)
                 .WithOne(x => x.CompanyJobs)
-                .HasForeignKey(x => x.Job);
+                .HasForeignKey(x => x.Job)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region CompanyProfilePoco modelBuilder
             modelBuilder.Entity<CompanyProfilePoco>()
                 .HasMany(x => x.CompanyLocations)
                 .WithOne(x => x.CompanyProfiles)
-                .HasForeignKey(x => x.Company);
+                .HasForeignKey(x => x.Company)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<CompanyProfilePoco>()
                 .HasMany(x => x.CompanyDescriptions)
                 .WithOne(x => x.CompanyProfiles)
-                .HasForeignKey(x => x.Company);
+                .HasForeignKey(x => x.Company)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<CompanyProfilePoco>()
                 .HasMany(x => x.CompanyJobs)
                 .WithOne(x => x.CompanyProfiles)
-                .HasForeignKey(x => x.Company);
+                .HasForeignKey(x => x.Company)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
+
             #region timestamp ignore implementation
             //don't map timestamp, with optimistic concurrency detection -> .Property(t => t.TimeStamp).IsRowVersion() or .Ignore(t => t.TimeStamp);
             modelBuilder.Entity<ApplicantProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
