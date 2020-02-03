@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -28,21 +29,20 @@ namespace CareerCloud.EntityFrameworkDataAccess
             _context.SaveChangesAsync();
         }
 
-        //future iterations
-        public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            //building an expression tree which is an IQueryable
+            IQueryable<T> dbQuery = _context.Set<T>();
+            foreach(Expression<Func<T,object>> property in navigationProperties)
+            {
+                dbQuery = dbQuery.Include<T, object>(property);
+            }
+            return dbQuery.ToList<T>();
         }
 
-        public IList<T> GetList(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public T GetSingle(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
         {
@@ -67,6 +67,16 @@ namespace CareerCloud.EntityFrameworkDataAccess
             }
             //telling EF savechanges task 
             _context.SaveChangesAsync();
+        }
+
+        //future iterations, not yet implementated for now
+        public void CallStoredProc(string name, params Tuple<string, string>[] parameters)
+        {
+            throw new NotImplementedException();
+        }
+        public IList<T> GetList(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
+        {
+            throw new NotImplementedException();
         }
     }
 }
