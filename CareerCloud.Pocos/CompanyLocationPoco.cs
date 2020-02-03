@@ -22,5 +22,7 @@ namespace CareerCloud.Pocos
         public string PostalCode { get; set; }
         [Column("Time_Stamp")]
         public Byte[] TimeStamp { get; set; }
+
+        public virtual CompanyProfilePoco CompanyProfiles { get; set; }
     }
 }

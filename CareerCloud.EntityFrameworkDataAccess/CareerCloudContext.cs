@@ -30,11 +30,13 @@ namespace CareerCloud.EntityFrameworkDataAccess
         //EF6 uses DbModelBuilder while EFCore uses ModelBuilder https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating?view=efcore-3.1
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region SystemLanguageCodePoco modelBuilder
             modelBuilder.Entity<SystemLanguageCodePoco>()
                 .HasMany(x => x.CompanyDescriptions)
                 .WithOne(x => x.SystemLanguageCodes)
                 .HasForeignKey(x => x.LanguageId);
-
+            #endregion
+            #region SystemCountryCodePoco modelBuilder
             modelBuilder.Entity<SystemCountryCodePoco>()
                 .HasMany(x => x.ApplicantWorkHistory)
                 .WithOne(x => x.SystemCountryCodes)
@@ -43,13 +45,16 @@ namespace CareerCloud.EntityFrameworkDataAccess
             modelBuilder.Entity<SystemCountryCodePoco>()
                 .HasMany(x => x.ApplicantProfiles)
                 .WithOne(x => x.SystemCountryCodes)
-                .HasForeignKey(x => x.Country);            
-
+                .HasForeignKey(x => x.Country);
+            #endregion
+            #region SecurityRolePoco modelBuilder
             modelBuilder.Entity<SecurityRolePoco>()
                 .HasMany(x => x.SecurityLoginsRoles)
                 .WithOne(x => x.SecurityRoles)
                 .HasForeignKey(x => x.Id);
-           
+            #endregion
+
+            #region SecurityLoginPoco modelBuilder
             modelBuilder.Entity<SecurityLoginPoco>()
                 .HasMany(x => x.SecurityLoginsLog)
                 .WithOne(x => x.SecurityLogins)
@@ -64,7 +69,8 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .HasMany(x => x.SecurityLoginsRoles)
                 .WithOne(x => x.SecurityLogins)
                 .HasForeignKey(x => x.Login);
-
+            #endregion
+            #region ApplicantProfilePoco
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasMany(x => x.ApplicantSkills)
                 .WithOne(x => x.ApplicantProfiles)
@@ -89,7 +95,8 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .HasMany(x => x.ApplicantEducations)
                 .WithOne(x => x.ApplicantProfiles)
                 .HasForeignKey(x => x.Applicant);
-
+            #endregion
+            #region CompanyJobPoco modelBuilder
             modelBuilder.Entity<CompanyJobPoco>()
                 .HasMany(x => x.CompanyJobEducations)
                 .WithOne(x => x.CompanyJobs)
@@ -109,12 +116,25 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .HasMany(x => x.ApplicantJobApplications)
                 .WithOne(x => x.CompanyJobs)
                 .HasForeignKey(x => x.Job);
+            #endregion
+            #region CompanyProfilePoco modelBuilder
+            modelBuilder.Entity<CompanyProfilePoco>()
+                .HasMany(x => x.CompanyLocations)
+                .WithOne(x => x.CompanyProfiles)
+                .HasForeignKey(x => x.Company);
+            modelBuilder.Entity<CompanyProfilePoco>()
+                .HasMany(x => x.CompanyDescriptions)
+                .WithOne(x => x.CompanyProfiles)
+                .HasForeignKey(x => x.Company);
+            modelBuilder.Entity<CompanyProfilePoco>()
+                .HasMany(x => x.CompanyJobs)
+                .WithOne(x => x.CompanyProfiles)
+                .HasForeignKey(x => x.Company);
+            #endregion
 
 
 
-
-
-
+            #region timestamp ignore implementation
             //don't map timestamp, with optimistic concurrency detection -> .Property(t => t.TimeStamp).IsRowVersion() or .Ignore(t => t.TimeStamp);
             modelBuilder.Entity<ApplicantProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
             modelBuilder.Entity<ApplicantJobApplicationPoco>().Property(t => t.TimeStamp).IsRowVersion();
@@ -130,6 +150,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
             modelBuilder.Entity<CompanyProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
             modelBuilder.Entity<SecurityLoginPoco>().Property(t => t.TimeStamp).IsRowVersion();
             modelBuilder.Entity<SecurityLoginsRolePoco>().Property(t => t.TimeStamp).IsRowVersion();
+            #endregion
 
 
 
