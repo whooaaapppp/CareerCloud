@@ -53,11 +53,15 @@ namespace CareerCloud.EntityFrameworkDataAccess
             return dbQuery.Where(where).ToList<T>();
         }
 
-
-
         public T GetSingle(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> dbQuery = _context.Set<T>();
+            foreach (Expression < Func<T, object> > property in navigationProperties)
+            {
+                dbQuery = dbQuery.Include<T, object>(property);
+            }
+            //firstordefault is used to handle nullable or exception generating results
+            return dbQuery.Where(where).FirstOrDefault();
         }
 
         public void Remove(params T[] items)
