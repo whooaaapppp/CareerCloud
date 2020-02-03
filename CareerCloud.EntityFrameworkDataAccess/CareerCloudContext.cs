@@ -18,16 +18,14 @@ namespace CareerCloud.EntityFrameworkDataAccess
             var config = new ConfigurationBuilder();
             var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
             config.AddJsonFile(path, false);
-            var root = config.Build();
-            string _connstr = root.GetSection("ConnectionStrings").GetSection("DataConnection").Value;
-
             //pass db sql config on the optionsBuilder
-            optionsBuilder.UseSqlServer(_connstr);
+            optionsBuilder.UseSqlServer(config.Build().GetSection("ConnectionStrings").GetSection("DataConnection").Value);
 
             base.OnConfiguring(optionsBuilder);
         }
 
         //EF6 uses DbModelBuilder while EFCore uses ModelBuilder https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating?view=efcore-3.1
+        #region OnModelCreating Model Builder
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region SystemLanguageCodePoco modelBuilder
@@ -53,7 +51,6 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .WithOne(x => x.SecurityRoles)
                 .HasForeignKey(x => x.Id);
             #endregion
-
             #region SecurityLoginPoco modelBuilder
             modelBuilder.Entity<SecurityLoginPoco>()
                 .HasMany(x => x.SecurityLoginsLog)
@@ -131,9 +128,6 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .WithOne(x => x.CompanyProfiles)
                 .HasForeignKey(x => x.Company);
             #endregion
-
-
-
             #region timestamp ignore implementation
             //don't map timestamp, with optimistic concurrency detection -> .Property(t => t.TimeStamp).IsRowVersion() or .Ignore(t => t.TimeStamp);
             modelBuilder.Entity<ApplicantProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
@@ -151,23 +145,12 @@ namespace CareerCloud.EntityFrameworkDataAccess
             modelBuilder.Entity<SecurityLoginPoco>().Property(t => t.TimeStamp).IsRowVersion();
             modelBuilder.Entity<SecurityLoginsRolePoco>().Property(t => t.TimeStamp).IsRowVersion();
             #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            //once all models are created execute this
             base.OnModelCreating(modelBuilder);
         }
+        #endregion
 
+        #region DBSet Per Poco
         //setting DbSet properties for each Poco per CareerCloud.Pocos
         public DbSet<ApplicantEducationPoco> ApplicantEducations { get; set; }
         public DbSet<ApplicantJobApplicationPoco> ApplicantJobApplications { get; set; }
@@ -175,7 +158,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public DbSet<ApplicantResumePoco> ApplicantResumes { get; set; }
         public DbSet<ApplicantSkillPoco> ApplicantSkills { get; set; }
         public DbSet<ApplicantWorkHistoryPoco> ApplicantWorkHistory { get; set; }
-        DbSet<CompanyDescriptionPoco> CompanyDescriptions { get; set; }
+        public DbSet<CompanyDescriptionPoco> CompanyDescriptions { get; set; }
         public DbSet<CompanyJobDescriptionPoco> CompanyJobsDescriptions { get; set; }
         public DbSet<CompanyJobPoco> CompanyJobs { get; set; }
         public DbSet<CompanyJobSkillPoco> CompanyJobSkills { get; set; }
@@ -187,6 +170,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public DbSet<SecurityRolePoco> SecurityRoles { get; set; }
         public DbSet<SystemCountryCodePoco> SystemCountryCodes { get; set; }
         public DbSet<SystemLanguageCodePoco> SystemLanguageCodes { get; set; }
+        #endregion
 
 
     }
