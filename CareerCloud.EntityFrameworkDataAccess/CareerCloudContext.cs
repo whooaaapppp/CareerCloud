@@ -65,6 +65,11 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .WithOne(x => x.SecurityLogins)
                 .HasForeignKey(x => x.Login);
 
+            modelBuilder.Entity<ApplicantProfilePoco>()
+                .HasMany(x => x.ApplicantSkills)
+                .WithOne(x => x.ApplicantProfiles)
+                .HasForeignKey(x => x.Applicant);
+
 
 
 
