@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CareerCloud.Pocos
@@ -9,5 +10,8 @@ namespace CareerCloud.Pocos
         [Key]
         public string Code { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<ApplicantProfilePoco> ApplicantProfiles { get; set; }
+        public virtual ICollection<ApplicantWorkHistoryPoco> ApplicantWorkHistory { get; set; }
     }
 }

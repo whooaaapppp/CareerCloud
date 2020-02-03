@@ -33,10 +33,22 @@ namespace CareerCloud.EntityFrameworkDataAccess
             modelBuilder.Entity<SystemLanguageCodePoco>()
                 .HasMany(c => c.CompanyDescriptions)
                 .WithOne(d => d.SystemLanguageCodes)
-                .HasForeignKey(e => e.LanguageId)
-                .IsRequired();
+                .HasForeignKey(e => e.LanguageId);
 
-            //modelBuilder.Entity<SystemCountryCodePoco>()
+
+            modelBuilder.Entity<SystemCountryCodePoco>()
+                .HasMany(c => c.ApplicantWorkHistory)
+                .WithOne(d => d.SystemCountryCodes)
+                .HasForeignKey(e => e.CountryCode);
+
+            modelBuilder.Entity<SystemCountryCodePoco>()
+                .HasMany(c => c.ApplicantProfiles)
+                .WithOne(d => d.SystemCountryCodes)
+                .HasForeignKey(e => e.Country);
+
+
+
+
 
 
 

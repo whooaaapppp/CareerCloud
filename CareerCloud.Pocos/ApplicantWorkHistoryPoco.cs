@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,7 +31,13 @@ namespace CareerCloud.Pocos
         public int EndYear { get; set; }
         [Column("Time_Stamp")]
         public Byte[] TimeStamp { get; set; }
+    
+        public virtual SystemCountryCodePoco SystemCountryCodes { get; set; }
+    
+    
     }
+
+    
 
 
 
