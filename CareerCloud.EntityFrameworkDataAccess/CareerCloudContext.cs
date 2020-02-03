@@ -70,6 +70,28 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .WithOne(x => x.ApplicantProfiles)
                 .HasForeignKey(x => x.Applicant);
 
+            modelBuilder.Entity<ApplicantProfilePoco>()
+                .HasMany(x => x.ApplicantResumes)
+                .WithOne(x => x.ApplicantProfiles)
+                .HasForeignKey(x => x.Applicant);
+
+            modelBuilder.Entity<ApplicantProfilePoco>()
+                .HasMany(x => x.ApplicantWorkHistory)
+                .WithOne(x => x.ApplicantProfiles)
+                .HasForeignKey(x => x.Applicant);
+
+            modelBuilder.Entity<ApplicantProfilePoco>()
+                .HasMany(x => x.ApplicantJobApplications)
+                .WithOne(x => x.ApplicantProfiles)
+                .HasForeignKey(x => x.Applicant);
+
+            modelBuilder.Entity<ApplicantProfilePoco>()
+                .HasMany(x => x.ApplicantEducations)
+                .WithOne(x => x.ApplicantProfiles)
+                .HasForeignKey(x => x.Applicant);
+
+
+
 
             //don't map timestamp, with optimistic concurrency detection -> .Property(t => t.TimeStamp).IsRowVersion() or .Ignore(t => t.TimeStamp);
             modelBuilder.Entity<ApplicantProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
