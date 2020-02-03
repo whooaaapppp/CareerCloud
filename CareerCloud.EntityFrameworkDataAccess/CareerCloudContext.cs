@@ -71,6 +71,24 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .HasForeignKey(x => x.Applicant);
 
 
+            //don't map timestamp, with optimistic concurrency detection -> .Property(t => t.TimeStamp).IsRowVersion() or .Ignore(t => t.TimeStamp);
+            modelBuilder.Entity<ApplicantProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<ApplicantJobApplicationPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<ApplicantEducationPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<ApplicantSkillPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<ApplicantWorkHistoryPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyDescriptionPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyJobSkillPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyJobPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyJobEducationPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyJobDescriptionPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyLocationPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<CompanyProfilePoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<SecurityLoginPoco>().Property(t => t.TimeStamp).IsRowVersion();
+            modelBuilder.Entity<SecurityLoginsRolePoco>().Property(t => t.TimeStamp).IsRowVersion();
+
+
+
 
 
 
