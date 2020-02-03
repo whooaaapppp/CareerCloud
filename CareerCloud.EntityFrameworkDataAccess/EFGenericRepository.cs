@@ -42,7 +42,18 @@ namespace CareerCloud.EntityFrameworkDataAccess
             return dbQuery.ToList<T>();
         }
 
-        
+        public IList<T> GetList(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
+        {
+            //wrap in expression in IQueryable, using where to filter specific criteria
+            IQueryable<T> dbQuery = _context.Set<T>();
+            foreach (var item in navigationProperties)
+            {
+                dbQuery = dbQuery.Include<T, object>(item);
+            }
+            return dbQuery.Where(where).ToList<T>();
+        }
+
+
 
         public T GetSingle(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
         {
@@ -74,9 +85,6 @@ namespace CareerCloud.EntityFrameworkDataAccess
         {
             throw new NotImplementedException();
         }
-        public IList<T> GetList(Expression<Func<T, bool>> where, params Expression<Func<T, object>>[] navigationProperties)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
