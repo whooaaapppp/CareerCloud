@@ -26,7 +26,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 _context.Entry(item).State = EntityState.Added;
             }
             //telling EF savechanges task 
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         
@@ -71,7 +71,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 _context.Entry(item).State = EntityState.Deleted;
             }
             //telling EF savechanges task 
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Update(params T[] items)
@@ -81,7 +81,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 _context.Entry(item).State = EntityState.Modified;
             }
             //telling EF savechanges task 
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         //future iterations, not yet implementated for now
