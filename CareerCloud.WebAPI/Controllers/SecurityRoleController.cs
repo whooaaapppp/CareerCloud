@@ -14,7 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityRoleController : ControllerBase
     {
-        private SecurityRoleLogic _logic;
+        private readonly SecurityRoleLogic _logic;
         
 
         public SecurityRoleController()
@@ -28,7 +28,7 @@ namespace CareerCloud.WebAPI.Controllers
         [Route("role/{id}")]
         public ActionResult GetSecurityRole(Guid id)
         {
-            SecurityLoginsRolePoco poco = _logic.Get(id);
+            SecurityRolePoco poco = _logic.Get(id);
             if (poco == null)
             {
                 //404
@@ -46,7 +46,7 @@ namespace CareerCloud.WebAPI.Controllers
         [Route("role")]
         public ActionResult GetAllSecurityLoginsRole()
         {
-            List<SecurityLoginsRolePoco> pocos = _logic.GetAll();
+            List<SecurityRolePoco> pocos = _logic.GetAll();
             if (pocos == null)
             {
                 //404
