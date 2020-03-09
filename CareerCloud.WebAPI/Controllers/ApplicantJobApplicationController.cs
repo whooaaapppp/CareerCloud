@@ -12,14 +12,14 @@ namespace CareerCloud.WebAPI.Controllers
 {
     [Route("api/careercloud/applicant/v1")]
     [ApiController]
-    public class ApplicantEducationController : ControllerBase
+    public class ApplicantJobApplicationController : ControllerBase
     {
-        private readonly ApplicantEducationLogic _logic;
+        private readonly ApplicantJobApplicationLogic _logic;
 
-        public ApplicantEducationController()
+        public ApplicantJobApplicationController()
         {
-            EFGenericRepository<ApplicantEducationPoco> repo = new EFGenericRepository<ApplicantEducationPoco>();
-            _logic = new ApplicantEducationLogic(repo);
+            var repo = new EFGenericRepository<ApplicantJobApplicationPoco>();
+            _logic = new ApplicantJobApplicationLogic(repo);
 
 
         }
@@ -27,9 +27,9 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("education/{id}")]
-        public ActionResult GetApplicantEducation(Guid id)
+        public ActionResult GetApplicantJobApplication(Guid id)
         {
-            ApplicantEducationPoco poco = _logic.Get(id);
+            ApplicantJobApplicationPoco poco = _logic.Get(id);
             if (poco == null)
             {
                 //404
@@ -45,9 +45,9 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("education")]
-        public ActionResult GetAllApplicantEducation()
+        public ActionResult GetAllApplicantJobApplication()
         {
-            List<ApplicantEducationPoco> pocos = _logic.GetAll();
+            List<ApplicantJobApplicationPoco> pocos = _logic.GetAll();
             if (pocos == null)
             {
                 //404
@@ -66,9 +66,9 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
         [Route("education")]
-        public ActionResult PostApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        public ActionResult PostApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
-            _logic.Add(applicantEducationPocos);
+            _logic.Add(applicantJobApplicationPocos);
             return Ok();
         }
 
@@ -77,9 +77,9 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
         [Route("education")]
-        public ActionResult PutApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        public ActionResult PutApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
-            _logic.Update(applicantEducationPocos);
+            _logic.Update(applicantJobApplicationPocos);
             return Ok();
         }
 
@@ -88,9 +88,9 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
         [Route("education")]
-        public ActionResult DeleteApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        public ActionResult DeleteApplicantJobApplication([FromBody]ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
-            _logic.Delete(applicantEducationPocos);
+            _logic.Delete(applicantJobApplicationPocos);
             return Ok();
         }
 
