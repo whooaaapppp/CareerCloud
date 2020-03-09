@@ -27,7 +27,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("education/{id}")]
-        public ActionResult GetApplicantEducation(Guid id)
+        public ActionResult GetApplicantJobApplication(Guid id)
         {
             ApplicantJobApplicationPoco poco = _logic.Get(id);
             if (poco == null)
@@ -45,7 +45,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("education")]
-        public ActionResult GetAllApplicantEducation()
+        public ActionResult GetAllApplicantJobApplication()
         {
             List<ApplicantJobApplicationPoco> pocos = _logic.GetAll();
             if (pocos == null)
@@ -66,7 +66,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
         [Route("education")]
-        public ActionResult PostApplicantEducation([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
+        public ActionResult PostApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
             _logic.Add(applicantJobApplicationPocos);
             return Ok();
@@ -77,7 +77,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
         [Route("education")]
-        public ActionResult PutApplicantEducation([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
+        public ActionResult PutApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
             _logic.Update(applicantJobApplicationPocos);
             return Ok();
@@ -88,7 +88,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
         [Route("education")]
-        public ActionResult DeleteApplicantEducation([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
+        public ActionResult DeleteApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
             _logic.Delete(applicantJobApplicationPocos);
             return Ok();
