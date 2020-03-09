@@ -27,7 +27,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         //Get on ID
         [HttpGet]
-        [Route("profile/{id}")]
+        [Route("resume/{id}")]
         public ActionResult GetApplicantResume(Guid id)
         {
             ApplicantResumePoco poco = _logic.Get(id);
@@ -45,7 +45,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         //Get All
         [HttpGet]
-        [Route("profile")]
+        [Route("resume")]
         public ActionResult GetAllApplicantResume()
         {
             List<ApplicantResumePoco> pocos = _logic.GetAll();
@@ -66,7 +66,7 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
-        [Route("profile")]
+        [Route("resume")]
         public ActionResult PostApplicantResume([FromBody] ApplicantResumePoco[] applicantResumePocos)
         {
             _logic.Add(applicantResumePocos);
@@ -77,7 +77,7 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
-        [Route("profile")]
+        [Route("resume")]
         public ActionResult PutApplicantResume([FromBody] ApplicantResumePoco[] applicantResumePocos)
         {
             _logic.Update(applicantResumePocos);
@@ -88,7 +88,7 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
-        [Route("profile")]
+        [Route("resume")]
         public ActionResult DeleteApplicantResume([FromBody] ApplicantResumePoco[] applicantResumePocos)
         {
             _logic.Delete(applicantResumePocos);

@@ -26,7 +26,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         //Get on ID
         [HttpGet]
-        [Route("education/{id}")]
+        [Route("jobapplication/{id}")]
         public ActionResult GetApplicantJobApplication(Guid id)
         {
             ApplicantJobApplicationPoco poco = _logic.Get(id);
@@ -44,7 +44,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         //Get All
         [HttpGet]
-        [Route("education")]
+        [Route("jobapplication")]
         public ActionResult GetAllApplicantJobApplication()
         {
             List<ApplicantJobApplicationPoco> pocos = _logic.GetAll();
@@ -65,7 +65,7 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
-        [Route("education")]
+        [Route("jobapplication")]
         public ActionResult PostApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
             _logic.Add(applicantJobApplicationPocos);
@@ -76,7 +76,7 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
-        [Route("education")]
+        [Route("jobapplication")]
         public ActionResult PutApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
             _logic.Update(applicantJobApplicationPocos);
@@ -87,7 +87,7 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
-        [Route("education")]
+        [Route("jobapplication")]
         public ActionResult DeleteApplicantJobApplication([FromBody]ApplicantJobApplicationPoco[] applicantJobApplicationPocos)
         {
             _logic.Delete(applicantJobApplicationPocos);
