@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantWorkHistoryController : ControllerBase
     {
-        private ApplicantWorkHistoryLogic _logic;
-        
+        private readonly ApplicantWorkHistoryLogic _logic;        
 
         public ApplicantWorkHistoryController()
         {

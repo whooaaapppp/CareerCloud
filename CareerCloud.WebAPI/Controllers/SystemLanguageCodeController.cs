@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SystemLanguageCodeController : ControllerBase
     {
-        private SystemLanguageCodeLogic _logic;
-        
+        private readonly SystemLanguageCodeLogic _logic;
 
         public SystemLanguageCodeController()
         {

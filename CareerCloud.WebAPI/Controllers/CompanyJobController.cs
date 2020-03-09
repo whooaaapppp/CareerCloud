@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyJobController : ControllerBase
     {
-        private CompanyJobLogic _logic;
-        
+        private readonly CompanyJobLogic _logic;        
 
         public CompanyJobController()
         {

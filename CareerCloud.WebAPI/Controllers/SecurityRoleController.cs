@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityRoleController : ControllerBase
     {
-        private readonly SecurityRoleLogic _logic;
-        
+        private readonly SecurityRoleLogic _logic;        
 
         public SecurityRoleController()
         {

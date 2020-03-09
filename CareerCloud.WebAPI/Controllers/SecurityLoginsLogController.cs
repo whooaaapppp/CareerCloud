@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityLoginsLogController : ControllerBase
     {
-        private SecurityLoginsLogLogic _logic;
-        
+        private readonly SecurityLoginsLogLogic _logic;        
 
         public SecurityLoginsLogController()
         {
@@ -26,7 +25,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("loginslog/{id}")]
-        public ActionResult GetSecurityLoginsLog(Guid id)
+        public ActionResult GetSecurityLoginLog(Guid id)
         {
             SecurityLoginsLogPoco poco = _logic.Get(id);
             if (poco == null)
@@ -44,7 +43,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("loginslog")]
-        public ActionResult GetAllSecurityLoginsLog()
+        public ActionResult GetAllSecurityLoginLog()
         {
             List<SecurityLoginsLogPoco> pocos = _logic.GetAll();
             if (pocos == null)
@@ -65,7 +64,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
         [Route("loginslog")]
-        public ActionResult PostSecurityLoginsLog([FromBody] SecurityLoginsLogPoco[] securityLoginsLogPocos)
+        public ActionResult PostSecurityLoginLog([FromBody] SecurityLoginsLogPoco[] securityLoginsLogPocos)
         {
             _logic.Add(securityLoginsLogPocos);
             return Ok();
@@ -76,7 +75,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
         [Route("loginslog")]
-        public ActionResult PutSecurityLoginsLog([FromBody] SecurityLoginsLogPoco[] securityLoginsLogPocos)
+        public ActionResult PutSecurityLoginLog([FromBody] SecurityLoginsLogPoco[] securityLoginsLogPocos)
         {
             _logic.Update(securityLoginsLogPocos);
             return Ok();
@@ -87,7 +86,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
         [Route("loginslog")]
-        public ActionResult DeleteSecurityLoginsLog([FromBody] SecurityLoginsLogPoco[] securityLoginsLogPocos)
+        public ActionResult DeleteSecurityLoginLog([FromBody] SecurityLoginsLogPoco[] securityLoginsLogPocos)
         {
             _logic.Delete(securityLoginsLogPocos);
             return Ok();

@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantProfileController : ControllerBase
     {
-        private ApplicantProfileLogic _logic;
-        
+        private readonly ApplicantProfileLogic _logic;        
 
         public ApplicantProfileController()
         {
@@ -28,7 +27,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("profile/{id}")]
-        public ActionResult GetApplicantJobApplication(Guid id)
+        public ActionResult GetApplicantProfile(Guid id)
         {
             ApplicantProfilePoco poco = _logic.Get(id);
             if (poco == null)

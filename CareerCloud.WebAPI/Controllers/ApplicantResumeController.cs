@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantResumeController : ControllerBase
     {
-        private ApplicantResumeLogic _logic;
-        
+        private readonly ApplicantResumeLogic _logic;        
 
         public ApplicantResumeController()
         {

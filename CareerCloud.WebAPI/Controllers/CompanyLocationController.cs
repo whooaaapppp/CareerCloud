@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyLocationController : ControllerBase
     {
-        private CompanyLocationLogic _logic;
-        
+        private readonly CompanyLocationLogic _logic;        
 
         public CompanyLocationController()
         {
@@ -65,7 +64,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
         [Route("location")]
-        public ActionResult PostCompanyJobSkill([FromBody] CompanyLocationPoco[] companyLocationPocos)
+        public ActionResult PostCompanyLocation([FromBody] CompanyLocationPoco[] companyLocationPocos)
         {
             _logic.Add(companyLocationPocos);
             return Ok();
@@ -87,7 +86,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
         [Route("location")]
-        public ActionResult DeleteCompanyJobSkill([FromBody] CompanyLocationPoco[] companyLocationPocos)
+        public ActionResult DeleteCompanyLocation([FromBody] CompanyLocationPoco[] companyLocationPocos)
         {
             _logic.Delete(companyLocationPocos);
             return Ok();

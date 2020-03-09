@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityLoginsRoleController : ControllerBase
     {
-        private SecurityLoginsRoleLogic _logic;
-        
+        private readonly SecurityLoginsRoleLogic _logic;        
 
         public SecurityLoginsRoleController()
         {
@@ -65,7 +64,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
         [Route("loginsrole")]
-        public ActionResult PostSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] securityLoginsRolePocos)
+        public ActionResult PostSecurityLoginRole([FromBody] SecurityLoginsRolePoco[] securityLoginsRolePocos)
         {
             _logic.Add(securityLoginsRolePocos);
             return Ok();
@@ -76,7 +75,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
         [Route("loginsrole")]
-        public ActionResult PutSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] securityLoginsRolePocos)
+        public ActionResult PutSecurityLoginRole([FromBody] SecurityLoginsRolePoco[] securityLoginsRolePocos)
         {
             _logic.Update(securityLoginsRolePocos);
             return Ok();
@@ -87,7 +86,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
         [Route("loginsrole")]
-        public ActionResult DeleteSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] securityLoginsRolePocos)
+        public ActionResult DeleteSecurityLoginRole([FromBody] SecurityLoginsRolePoco[] securityLoginsRolePocos)
         {
             _logic.Delete(securityLoginsRolePocos);
             return Ok();

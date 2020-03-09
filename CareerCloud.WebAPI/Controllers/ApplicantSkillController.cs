@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantSkillController : ControllerBase
     {
-        private ApplicantSkillLogic _logic;
-        
+        private readonly ApplicantSkillLogic _logic;        
 
         public ApplicantSkillController()
         {

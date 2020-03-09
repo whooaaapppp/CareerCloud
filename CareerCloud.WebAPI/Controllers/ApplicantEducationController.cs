@@ -15,7 +15,6 @@ namespace CareerCloud.WebAPI.Controllers
     public class ApplicantEducationController : ControllerBase
     {
         private readonly ApplicantEducationLogic _logic;
-
         public ApplicantEducationController()
         {
             var repo = new EFGenericRepository<ApplicantEducationPoco>();

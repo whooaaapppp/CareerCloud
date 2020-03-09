@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyDescriptionController : ControllerBase
     {
-        private CompanyDescriptionLogic _logic;
-        
+        private readonly CompanyDescriptionLogic _logic;        
 
         public CompanyDescriptionController()
         {

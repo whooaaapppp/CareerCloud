@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyJobsDescriptionController : ControllerBase
     {
-        private CompanyJobDescriptionLogic _logic;
-        
+        private readonly CompanyJobDescriptionLogic _logic;        
 
         public CompanyJobsDescriptionController()
         {
@@ -26,7 +25,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("jobsdescription/{id}")]
-        public ActionResult GetCompanyJobDescription(Guid id)
+        public ActionResult GetCompanyJobsDescription(Guid id)
         {
             CompanyJobDescriptionPoco poco = _logic.Get(id);
             if (poco == null)
@@ -44,7 +43,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("jobsdescription")]
-        public ActionResult GetAllCompanyJobDescription()
+        public ActionResult GetAllCompanyJobsDescription()
         {
             List<CompanyJobDescriptionPoco> pocos = _logic.GetAll();
             if (pocos == null)
@@ -65,7 +64,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
         [Route("jobsdescription")]
-        public ActionResult PostCompanyJobDescription([FromBody] CompanyJobDescriptionPoco[] companyJobDescriptionPocos)
+        public ActionResult PostCompanyJobsDescription([FromBody] CompanyJobDescriptionPoco[] companyJobDescriptionPocos)
         {
             _logic.Add(companyJobDescriptionPocos);
             return Ok();
@@ -76,7 +75,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
         [Route("jobsdescription")]
-        public ActionResult PutCompanyJobDescription([FromBody] CompanyJobDescriptionPoco[] companyJobDescriptionPocos)
+        public ActionResult PutCompanyJobsDescription([FromBody] CompanyJobDescriptionPoco[] companyJobDescriptionPocos)
         {
             _logic.Update(companyJobDescriptionPocos);
             return Ok();
@@ -87,7 +86,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
         [Route("jobsdescription")]
-        public ActionResult DeleteCompanyJobDescription([FromBody] CompanyJobDescriptionPoco[] companyJobDescriptionPocos)
+        public ActionResult DeleteCompanyJobsDescription([FromBody] CompanyJobDescriptionPoco[] companyJobDescriptionPocos)
         {
             _logic.Delete(companyJobDescriptionPocos);
             return Ok();

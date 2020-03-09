@@ -14,8 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyJobEducationController : ControllerBase
     {
-        private CompanyJobEducationLogic _logic;
-        
+        private readonly CompanyJobEducationLogic _logic;        
 
         public CompanyJobEducationController()
         {
@@ -46,7 +45,7 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("jobeducation")]
-        public ActionResult GetAllCompanyJob()
+        public ActionResult GetAllCompanyJobEducation()
         {
             List<CompanyJobEducationPoco> pocos = _logic.GetAll();
             if (pocos == null)
@@ -78,7 +77,7 @@ namespace CareerCloud.WebAPI.Controllers
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
         [Route("jobeducation")]
-        public ActionResult PutCompanyJob([FromBody] CompanyJobEducationPoco[] companyJobEducationPocos)
+        public ActionResult PutCompanyJobEducation([FromBody] CompanyJobEducationPoco[] companyJobEducationPocos)
         {
             _logic.Update(companyJobEducationPocos);
             return Ok();
