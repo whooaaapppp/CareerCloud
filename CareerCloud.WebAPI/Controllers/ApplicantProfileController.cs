@@ -12,24 +12,25 @@ namespace CareerCloud.WebAPI.Controllers
 {
     [Route("api/careercloud/applicant/v1")]
     [ApiController]
-    public class ApplicantEducationController : ControllerBase
+    public class ApplicantProfileController : ControllerBase
     {
-        private readonly ApplicantEducationLogic _logic;
+        private ApplicantProfileLogic _logic;
+        
 
-        public ApplicantEducationController()
+        public ApplicantProfileController()
         {
-            EFGenericRepository<ApplicantEducationPoco> repo = new EFGenericRepository<ApplicantEducationPoco>();
-            _logic = new ApplicantEducationLogic(repo);
+            var repo = new EFGenericRepository<ApplicantProfilePoco>();
+            _logic = new ApplicantProfileLogic(repo);
 
 
         }
 
         //Get on ID
         [HttpGet]
-        [Route("education/{id}")]
-        public ActionResult GetApplicantEducation(Guid id)
+        [Route("profile/{id}")]
+        public ActionResult GetApplicantJobApplication(Guid id)
         {
-            ApplicantEducationPoco poco = _logic.Get(id);
+            ApplicantProfilePoco poco = _logic.Get(id);
             if (poco == null)
             {
                 //404
@@ -44,10 +45,10 @@ namespace CareerCloud.WebAPI.Controllers
 
         //Get All
         [HttpGet]
-        [Route("education")]
-        public ActionResult GetAllApplicantEducation()
+        [Route("profile")]
+        public ActionResult GetAllApplicantProfile()
         {
-            List<ApplicantEducationPoco> pocos = _logic.GetAll();
+            List<ApplicantProfilePoco> pocos = _logic.GetAll();
             if (pocos == null)
             {
                 //404
@@ -65,10 +66,10 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPost]
-        [Route("education")]
-        public ActionResult PostApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        [Route("profile")]
+        public ActionResult PostApplicantProfile([FromBody] ApplicantProfilePoco[] applicantProfilePocos)
         {
-            _logic.Add(applicantEducationPocos);
+            _logic.Add(applicantProfilePocos);
             return Ok();
         }
 
@@ -76,10 +77,10 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpPut]
-        [Route("education")]
-        public ActionResult PutApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        [Route("profile")]
+        public ActionResult PutApplicantProfile([FromBody] ApplicantProfilePoco[] applicantProfilePocos)
         {
-            _logic.Update(applicantEducationPocos);
+            _logic.Update(applicantProfilePocos);
             return Ok();
         }
 
@@ -87,10 +88,10 @@ namespace CareerCloud.WebAPI.Controllers
         //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
         //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
         [HttpDelete]
-        [Route("education")]
-        public ActionResult DeleteApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        [Route("profile")]
+        public ActionResult DeleteApplicantProfile([FromBody] ApplicantProfilePoco[] applicantProfilePocos)
         {
-            _logic.Delete(applicantEducationPocos);
+            _logic.Delete(applicantProfilePocos);
             return Ok();
         }
 
