@@ -24,6 +24,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         }
 
+        //Get on ID
         [HttpGet]
         [Route("education/{id}")]
         public ActionResult GetApplicantEducation(Guid id)
@@ -40,5 +41,61 @@ namespace CareerCloud.WebAPI.Controllers
                 return Ok(poco);
             }
         }
+
+        //Get All
+        [HttpGet]
+        [Route("education")]
+        public ActionResult GetAllApplicantEducation()
+        {
+            List<ApplicantEducationPoco> pocos = _logic.GetAll();
+            if (pocos == null)
+            {
+                //404
+                return NotFound();
+            }
+            else
+            {
+                //200
+                return Ok(pocos);
+            }
+
+        }
+
+        //Post
+        //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
+        //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
+        [HttpPost]
+        [Route("education")]
+        public ActionResult PostApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        {
+            _logic.Add(applicantEducationPocos);
+            return Ok();
+        }
+
+        //Put
+        //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
+        //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
+        [HttpPut]
+        [Route("education")]
+        public ActionResult PutApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        {
+            _logic.Update(applicantEducationPocos);
+            return Ok();
+        }
+
+        //Delete
+        //To force Web API to read a simple type from the request body, add the[FromBody] attribute to the parameter
+        //https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
+        [HttpDelete]
+        [Route("education")]
+        public ActionResult DeleteApplicantEducation([FromBody] ApplicantEducationPoco[] applicantEducationPocos)
+        {
+            _logic.Delete(applicantEducationPocos);
+            return Ok();
+        }
+
+
+
+
     }
 }
