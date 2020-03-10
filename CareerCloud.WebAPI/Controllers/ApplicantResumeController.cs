@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CareerCloud.BusinessLogicLayer;
 using CareerCloud.EntityFrameworkDataAccess;
 using CareerCloud.Pocos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CareerCloud.WebAPI.Controllers
@@ -27,6 +24,8 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("resume/{id}")]
+        //https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+        [ProducesResponseType(200, Type = typeof(ApplicantResumePoco))]
         public ActionResult GetApplicantResume(Guid id)
         {
             ApplicantResumePoco poco = _logic.Get(id);
@@ -45,6 +44,8 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("resume")]
+        //https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+        [ProducesResponseType(200, Type = typeof(List<ApplicantResumePoco>))]
         public ActionResult GetAllApplicantResume()
         {
             List<ApplicantResumePoco> pocos = _logic.GetAll();

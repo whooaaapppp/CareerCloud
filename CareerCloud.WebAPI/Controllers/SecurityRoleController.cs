@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CareerCloud.BusinessLogicLayer;
 using CareerCloud.EntityFrameworkDataAccess;
 using CareerCloud.Pocos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CareerCloud.WebAPI.Controllers
@@ -25,6 +22,8 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("role/{id}")]
+        //https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+        [ProducesResponseType(200, Type = typeof(SecurityRolePoco))]
         public ActionResult GetSecurityRole(Guid id)
         {
             SecurityRolePoco poco = _logic.Get(id);
@@ -43,6 +42,8 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("role")]
+        //https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+        [ProducesResponseType(200, Type = typeof(List<SecurityRolePoco>))]
         public ActionResult GetAllSecurityLoginsRole()
         {
             List<SecurityRolePoco> pocos = _logic.GetAll();

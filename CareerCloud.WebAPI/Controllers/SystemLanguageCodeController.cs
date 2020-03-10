@@ -25,6 +25,8 @@ namespace CareerCloud.WebAPI.Controllers
         //Get on ID
         [HttpGet]
         [Route("languagecode/{id}")]
+        //https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+        [ProducesResponseType(200, Type = typeof(SystemLanguageCodePoco))]
         public ActionResult GetSystemLanguageCode(string id)
         {
             SystemLanguageCodePoco poco = _logic.Get(id);
@@ -43,6 +45,8 @@ namespace CareerCloud.WebAPI.Controllers
         //Get All
         [HttpGet]
         [Route("languagecode")]
+        //https://docs.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-3.1
+        [ProducesResponseType(200, Type = typeof(List<SystemLanguageCodePoco>))]
         public ActionResult GetAllSystemLanguageCode()
         {
             List<SystemLanguageCodePoco> pocos = _logic.GetAll();
