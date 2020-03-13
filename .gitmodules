@@ -10,3 +10,6 @@
 [submodule "d:\\whooaaapppp\\HumberCollege\\source\\repo\\CareerCloud\\CareerCloudCore.UnitTests.Assignment1"]
 	path = d:\\whooaaapppp\\HumberCollege\\source\\repo\\CareerCloud\\CareerCloudCore.UnitTests.Assignment1
 	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment1
+[submodule "CareerCloudCore.UnitTests.Assignment1"]
+	path = CareerCloudCore.UnitTests.Assignment1
+	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment1
