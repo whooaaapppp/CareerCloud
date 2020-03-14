@@ -1,0 +1,15 @@
+[submodule "CareerCloudCore.UnitTests.Assignment1"]
+	path = CareerCloudCore.UnitTests.Assignment1
+	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment1
+[submodule "CareerCloudCore.UnitTests.Assignment2"]
+	path = CareerCloudCore.UnitTests.Assignment2
+	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment2
+[submodule "CareerCloudCore.UnitTests.Assignment3"]
+	path = CareerCloudCore.UnitTests.Assignment3
+	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment3
+[submodule "CareerCloudCore.UnitTests.Assignment4"]
+	path = CareerCloudCore.UnitTests.Assignment4
+	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment4
+[submodule "CareerCloudCore.UnitTests.Assignment5"]
+	path = CareerCloudCore.UnitTests.Assignment5
+	url = https://github.com/whooaaapppp/CareerCloudCore.UnitTests.Assignment5
