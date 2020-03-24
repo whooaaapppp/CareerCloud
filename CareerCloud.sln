@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloud.WebAPI", "Caree
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloudCore.UnitTests.Assignment1", "CareerCloudCore.UnitTests.Assignment1\CareerCloudCore.UnitTests.Assignment1.csproj", "{F9179A0E-E322-49FF-A7B5-55271526E44D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloud.gRPC", "CareerCloud.gRPC\CareerCloud.gRPC.csproj", "{10D0CC0F-98E4-43C1-9FBC-731F18C3A7E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerCloud.gRPC", "CareerCloud.gRPC\CareerCloud.gRPC.csproj", "{344817EB-275C-4B1D-A0EA-6D46255ABEEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,10 @@ Global
 		{F9179A0E-E322-49FF-A7B5-55271526E44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9179A0E-E322-49FF-A7B5-55271526E44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9179A0E-E322-49FF-A7B5-55271526E44D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10D0CC0F-98E4-43C1-9FBC-731F18C3A7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10D0CC0F-98E4-43C1-9FBC-731F18C3A7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10D0CC0F-98E4-43C1-9FBC-731F18C3A7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10D0CC0F-98E4-43C1-9FBC-731F18C3A7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{344817EB-275C-4B1D-A0EA-6D46255ABEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{344817EB-275C-4B1D-A0EA-6D46255ABEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{344817EB-275C-4B1D-A0EA-6D46255ABEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{344817EB-275C-4B1D-A0EA-6D46255ABEEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

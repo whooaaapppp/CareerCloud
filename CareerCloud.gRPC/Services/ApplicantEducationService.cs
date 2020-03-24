@@ -15,15 +15,18 @@ namespace CareerCloud.gRPC.Services
     public class ApplicantEducationService : ApplicantEducationBase
     {
         private readonly ApplicantEducationLogic _logic;
+
         public ApplicantEducationService()
         {
-            
+
             _logic = new ApplicantEducationLogic(new EFGenericRepository<ApplicantEducationPoco>());
 
         }
 
-        public override Task<ApplicantEducationPayload> ReadApplicantEducation(IdRequest request, ServerCallContext context)
+        public override Task<ApplicantEducationPayload> ReadApplicantEducation(IdRequestApplicantEducation request, ServerCallContext context)
         {
+
+
             ApplicantEducationPoco poco = _logic.Get(Guid.Parse(request.Id));
 
             if (poco is null)
@@ -42,7 +45,7 @@ namespace CareerCloud.gRPC.Services
                     Major = poco.Major,
                     StartDate = poco.StartDate is null ? null : Timestamp.FromDateTime((DateTime)poco.StartDate),
                 }
-                ) ;
+                );
         }
     }
 }

@@ -8,13 +8,13 @@ option csharp_namespace = "CareerCloud.gRPC.Protos";
 package CareerCloud.gRPC;
 
 service ApplicantEducation {
-	rpc ReadApplicantEducation(IdRequest) returns  (ApplicantEducationPayload);
+	rpc ReadApplicantEducation(IdRequestApplicantEducation) returns  (ApplicantEducationPayload);
 	rpc CreateApplicantEducation(ApplicantEducationPayload) returns (google.protobuf.Empty);
 	rpc UpdateApplicantEducation(ApplicantEducationPayload) returns (google.protobuf.Empty);
 	rpc DeleteApplicantEducation(ApplicantEducationPayload) returns (google.protobuf.Empty);
 }
 
-message IdRequest {
+message IdRequestApplicantEducation {
 	string Id = 1;
 }
 
@@ -27,3 +27,4 @@ message ApplicantEducationPayload{
     google.protobuf.Timestamp CompletionDate =6;  
     int32 CompletionPercent =7;
 }
+
