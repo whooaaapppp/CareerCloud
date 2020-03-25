@@ -19,6 +19,7 @@
     <None Remove="Protos\CompanyLocation.proto" />
     <None Remove="Protos\CompanyProfile.proto" />
     <None Remove="Protos\SecurityLogin.proto" />
+    <None Remove="Protos\SecurityLoginsLog.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
     <Protobuf Include="Protos\ApplicantResume.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantSkill.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyJob.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\SecurityLoginsLog.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\SecurityLogin.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyProfile.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyLocation.proto" GrpcServices="Server" />
