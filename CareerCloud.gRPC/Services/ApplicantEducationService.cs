@@ -43,7 +43,7 @@ namespace CareerCloud.gRPC.Services
                     CompletionDate = poco.CompletionDate is null ? null : Timestamp.FromDateTime((DateTime)poco.CompletionDate),
                     CompletionPercent = poco.CompletionPercent is null ? 0 : (int)poco.CompletionPercent,
                     Major = poco.Major,
-                    StartDate = poco.StartDate is null ? null : Timestamp.FromDateTime((DateTime)poco.StartDate),
+                    StartDate = poco.StartDate is null ? null : Timestamp.FromDateTime((DateTime)poco.StartDate)
                 }
                 );
         }

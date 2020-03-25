@@ -46,7 +46,5 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
-
-
     }
 }

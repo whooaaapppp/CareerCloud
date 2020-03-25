@@ -36,7 +36,7 @@ namespace CareerCloud.gRPC.Services
                     Id = poco.Id.ToString(),
                     Applicant = poco.Applicant.ToString(),
                     Resume = poco.Resume,
-                    LastUpdated = poco.LastUpdated is null ? null : Timestamp.FromDateTime((DateTime)poco.LastUpdated),
+                    LastUpdated = poco.LastUpdated is null ? null : Timestamp.FromDateTime((DateTime)poco.LastUpdated)
                     
                 }
                 );

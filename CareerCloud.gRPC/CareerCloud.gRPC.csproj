@@ -10,6 +10,7 @@
     <None Remove="Protos\ApplicantProfile.proto" />
     <None Remove="Protos\ApplicantResume.proto" />
     <None Remove="Protos\ApplicantSkill.proto" />
+    <None Remove="Protos\ApplicantWorkHistory.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +19,7 @@
     <Protobuf Include="Protos\ApplicantProfile.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantResume.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantSkill.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\ApplicantWorkHistory.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
   </ItemGroup>
 
