@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -12,6 +12,7 @@
     <None Remove="Protos\ApplicantSkill.proto" />
     <None Remove="Protos\ApplicantWorkHistory.proto" />
     <None Remove="Protos\CompanyDescription.proto" />
+    <None Remove="Protos\CompanyJobDescription.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,7 @@
     <Protobuf Include="Protos\ApplicantProfile.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantResume.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantSkill.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\CompanyJobDescription.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyDescription.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantWorkHistory.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
