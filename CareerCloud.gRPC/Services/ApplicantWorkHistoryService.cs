@@ -23,7 +23,7 @@ namespace CareerCloud.gRPC.Services
 
         }
 
-        public override Task<ApplicantWorkHistoryPayload> ReadApplicantEducation(IdRequestApplicantWorkHistory request, ServerCallContext context)
+        public override Task<ApplicantWorkHistoryPayload> ReadApplicantWorkHistory(IdRequestApplicantWorkHistory request, ServerCallContext context)
         {
 
 
@@ -48,7 +48,6 @@ namespace CareerCloud.gRPC.Services
                     StartYear = poco.StartYear,
                     EndMonth = poco.EndMonth,
                     EndYear = poco.EndYear
-
                 }
                 );
         }
