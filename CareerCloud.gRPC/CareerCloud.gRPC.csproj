@@ -7,11 +7,13 @@
   <ItemGroup>
     <None Remove="Protos\ApplicantEducation.proto" />
     <None Remove="Protos\ApplicantJobApplication.proto" />
+    <None Remove="Protos\ApplicantProfile.proto" />
   </ItemGroup>
 
   <ItemGroup>
     <Protobuf Include="Protos\ApplicantEducation.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantJobApplication.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\ApplicantProfile.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
   </ItemGroup>
 
