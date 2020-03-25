@@ -23,7 +23,7 @@ namespace CareerCloud.gRPC.Services
 
         }
 
-        public override Task<CompanyJobEducationPayload> ReadCompanyJobDescription(IdRequestCompanyJobEducation request, ServerCallContext context)
+        public override Task<CompanyJobEducationPayload> ReadCompanyJobEducation(IdRequestCompanyJobEducation request, ServerCallContext context)
         {
 
 

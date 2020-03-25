@@ -15,7 +15,6 @@ namespace CareerCloud.gRPC.Services
     public class ApplicantEducationService : ApplicantEducationBase
     {
         private readonly ApplicantEducationLogic _logic;
-
         public ApplicantEducationService()
         {
 

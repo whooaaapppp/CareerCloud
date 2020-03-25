@@ -12,6 +12,7 @@
     <None Remove="Protos\ApplicantSkill.proto" />
     <None Remove="Protos\ApplicantWorkHistory.proto" />
     <None Remove="Protos\CompanyDescription.proto" />
+    <None Remove="Protos\CompanyJob.proto" />
     <None Remove="Protos\CompanyJobDescription.proto" />
     <None Remove="Protos\CompanyJobEducation.proto" />
   </ItemGroup>
@@ -22,6 +23,7 @@
     <Protobuf Include="Protos\ApplicantProfile.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantResume.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\ApplicantSkill.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\CompanyJob.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyJobEducation.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyJobDescription.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\CompanyDescription.proto" GrpcServices="Server" />
