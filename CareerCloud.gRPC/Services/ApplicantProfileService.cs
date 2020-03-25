@@ -22,7 +22,7 @@ namespace CareerCloud.gRPC.Services
 
         }
 
-        public override Task<ApplicantProfilePayload> ReadApplicantEducation(IdRequestApplicantProfile request, ServerCallContext context)
+        public override Task<ApplicantProfilePayload> ReadApplicantProfile(IdRequestApplicantProfile request, ServerCallContext context)
         {
             ApplicantProfilePoco poco = _logic.Get(Guid.Parse(request.Id));
 
