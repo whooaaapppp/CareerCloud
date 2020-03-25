@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using static CareerCloud.gRPC.Protos.CompanyJobDescription;
 
 namespace CareerCloud.gRPC.Services
 {
@@ -39,7 +39,7 @@ namespace CareerCloud.gRPC.Services
                 {
                     Id = poco.Id.ToString(),
                     Job = poco.Job.ToString(),
-                    JobString = poco.JobString,
+                    JobName = poco.JobName,
                     JobDescriptions = poco.JobDescriptions
                     
                     
