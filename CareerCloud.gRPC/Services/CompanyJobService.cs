@@ -45,5 +45,70 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateCompanyJob(CompanyJobPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyJobPoco[] { new CompanyJobPoco() {
+                Id = new Guid(request.Id),
+                    
+                    Company = new Guid(request.Company),
+                    ProfileCreated =  Convert.ToDateTime(request.ProfileCreated),
+                    IsInactive = request.IsInactive,
+                    IsCompanyHidden = request.IsCompanyHidden,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateCompanyJob(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyJob(CompanyJobPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new CompanyJobPoco[] { new CompanyJobPoco() {
+                Id = new Guid(request.Id),
+
+                    Company = new Guid(request.Company),
+                    ProfileCreated =  Convert.ToDateTime(request.ProfileCreated),
+                    IsInactive = request.IsInactive,
+                    IsCompanyHidden = request.IsCompanyHidden,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.UpdateCompanyJob(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyJob(CompanyJobPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new CompanyJobPoco[] { new CompanyJobPoco() {
+                Id = new Guid(request.Id),
+
+                    Company = new Guid(request.Company),
+                    ProfileCreated =  Convert.ToDateTime(request.ProfileCreated),
+                    IsInactive = request.IsInactive,
+                    IsCompanyHidden = request.IsCompanyHidden,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.DeleteCompanyJob(request, context);
+        }
+
     }
 }
