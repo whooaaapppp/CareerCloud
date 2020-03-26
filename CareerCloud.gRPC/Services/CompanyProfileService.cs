@@ -47,5 +47,73 @@ namespace CareerCloud.gRPC.Services
                 }
                 ) ;
         }
+
+        public override Task<Empty> CreateCompanyProfile(CompanyProfilePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyProfilePoco[] { new CompanyProfilePoco() {
+                Id = new Guid(request.Id),
+                    RegistrationDate = Convert.ToDateTime(request.RegistrationDate),
+                    CompanyWebsite = request.CompanyWebsite,
+                    ContactPhone = request.ContactPhone,
+                    ContactName = request.ContactName,
+                    CompanyLogo = request.CompanyLogo.ToByteArray()
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateCompanyProfile(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyProfile(CompanyProfilePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new CompanyProfilePoco[] { new CompanyProfilePoco() {
+                Id = new Guid(request.Id),
+                    RegistrationDate = Convert.ToDateTime(request.RegistrationDate),
+                    CompanyWebsite = request.CompanyWebsite,
+                    ContactPhone = request.ContactPhone,
+                    ContactName = request.ContactName,
+                    CompanyLogo = request.CompanyLogo.ToByteArray()
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteCompanyProfile(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyProfile(CompanyProfilePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new CompanyProfilePoco[] { new CompanyProfilePoco() {
+                Id = new Guid(request.Id),
+                    RegistrationDate = Convert.ToDateTime(request.RegistrationDate),
+                    CompanyWebsite = request.CompanyWebsite,
+                    ContactPhone = request.ContactPhone,
+                    ContactName = request.ContactName,
+                    CompanyLogo = request.CompanyLogo.ToByteArray()
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.UpdateCompanyProfile(request, context);
+        }
+
     }
 }
