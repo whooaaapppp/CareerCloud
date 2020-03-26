@@ -44,5 +44,61 @@ namespace CareerCloud.gRPC.Services
                 }
                 ) ;
         }
+
+        public override Task<Empty> CreateSystemCountryCode(SystemCountryCodePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new SystemCountryCodePoco[] { new SystemCountryCodePoco() {
+                Code = request.Code,
+                Name = request.Name
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+           
+
+
+            return base.CreateSystemCountryCode(request, context);
+        }
+
+        public override Task<Empty> UpdateSystemCountryCode(SystemCountryCodePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new SystemCountryCodePoco[] { new SystemCountryCodePoco() {
+                Code = request.Code,
+                Name = request.Name
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateSystemCountryCode(request, context);
+        }
+
+        public override Task<Empty> DeleteSystemCountryCode(SystemCountryCodePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new SystemCountryCodePoco[] { new SystemCountryCodePoco() {
+                Code = request.Code,
+                Name = request.Name
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteSystemCountryCode(request, context);
+        }
     }
 }
