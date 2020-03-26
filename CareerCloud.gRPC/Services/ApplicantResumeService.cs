@@ -41,5 +41,66 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateApplicantResume(ApplicantResumePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new ApplicantResumePoco[] { new ApplicantResumePoco() {
+                Id = new Guid(request.Id),
+                Applicant = new Guid(request.Applicant),
+                    Resume = request.Resume,
+                    LastUpdated = request.LastUpdated is null ? DateTime.MinValue : Convert.ToDateTime(request.LastUpdated)
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.CreateApplicantResume(request, context);
+        }
+
+        public override Task<Empty> UpdateApplicantResume(ApplicantResumePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new ApplicantResumePoco[] { new ApplicantResumePoco() {
+                Id = new Guid(request.Id),
+                Applicant = new Guid(request.Applicant),
+                    Resume = request.Resume,
+                    LastUpdated = request.LastUpdated is null ? DateTime.MinValue : Convert.ToDateTime(request.LastUpdated)
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateApplicantResume(request, context);
+        }
+
+        public override Task<Empty> DeleteApplicantResume(ApplicantResumePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new ApplicantResumePoco[] { new ApplicantResumePoco() {
+                Id = new Guid(request.Id),
+                Applicant = new Guid(request.Applicant),
+                    Resume = request.Resume,
+                    LastUpdated = request.LastUpdated is null ? DateTime.MinValue : Convert.ToDateTime(request.LastUpdated)
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteApplicantResume(request, context);
+        }
     }
 }
