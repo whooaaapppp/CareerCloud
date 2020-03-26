@@ -48,31 +48,55 @@ namespace CareerCloud.gRPC.Services
 
         public override Task<Empty> CreateSystemLanguageCode(SystemLanguageCodePayload request, ServerCallContext context)
         {
-            _logic.Add(new SystemLanguageCodePoco[] { new SystemLanguageCodePoco() {
+            try
+            {
+                _logic.Add(new SystemLanguageCodePoco[] { new SystemLanguageCodePoco() {
                 LanguageID = request.LanguageID,
                 Name = request.Name,
                 NativeName = request.NativeName
             } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+                
+            }
             return base.CreateSystemLanguageCode(request, context);
         }
 
         public override Task<Empty> UpdateSystemLanguageCode(SystemLanguageCodePayload request, ServerCallContext context)
         {
-            _logic.Update(new SystemLanguageCodePoco[] { new SystemLanguageCodePoco() {
+            try
+            {
+                _logic.Update(new SystemLanguageCodePoco[] { new SystemLanguageCodePoco() {
                 LanguageID = request.LanguageID,
                 Name = request.Name,
                 NativeName = request.NativeName
             } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
             return base.UpdateSystemLanguageCode(request, context);
         }
 
         public override Task<Empty> DeleteSystemLanguageCode(SystemLanguageCodePayload request, ServerCallContext context)
         {
-            _logic.Delete(new SystemLanguageCodePoco[] { new SystemLanguageCodePoco() {
+            try
+            {
+                _logic.Delete(new SystemLanguageCodePoco[] { new SystemLanguageCodePoco() {
                 LanguageID = request.LanguageID,
                 Name = request.Name,
                 NativeName = request.NativeName
             } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
             return base.DeleteSystemLanguageCode(request, context);
         }
     }
