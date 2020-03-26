@@ -51,8 +51,95 @@ namespace CareerCloud.gRPC.Services
                     FullName = poco.FullName,
                     ForceChangePassword = poco.ForceChangePassword,
                     PreferredLanguage = poco.PrefferredLanguage
-        }
+                }
                 ) ;
+        }
+
+        public override Task<Empty> CreateSecurityLogin(SecurityLoginPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new SecurityLoginPoco[] { new SecurityLoginPoco() {
+                Id = new Guid(request.Id),
+                Login = request.Login,
+                Password = request.Password,
+                Created = Convert.ToDateTime(request.Created),
+                    PasswordUpdate = request.PasswordUpdate is null?DateTime.MinValue:Convert.ToDateTime(request.PasswordUpdate),
+                    AgreementAccepted = request.AgreementAccepted is null?DateTime.MinValue:Convert.ToDateTime(request.AgreementAccepted),
+                    IsLocked = request.IsLocked,
+                    IsInactive = request.IsInactive,
+                    EmailAddress = request.EmailAddress,
+                    PhoneNumber = request.PhoneNumber,
+                    FullName = request.FullName,
+                    ForceChangePassword = request.ForceChangePassword,
+                    PrefferredLanguage = request.PreferredLanguage
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateSecurityLogin(request, context);
+        }
+
+        public override Task<Empty> UpdateSecurityLogin(SecurityLoginPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new SecurityLoginPoco[] { new SecurityLoginPoco() {
+                Id = new Guid(request.Id),
+                Login = request.Login,
+                Password = request.Password,
+                Created = Convert.ToDateTime(request.Created),
+                    PasswordUpdate = request.PasswordUpdate is null?DateTime.MinValue:Convert.ToDateTime(request.PasswordUpdate),
+                    AgreementAccepted = request.AgreementAccepted is null?DateTime.MinValue:Convert.ToDateTime(request.AgreementAccepted),
+                    IsLocked = request.IsLocked,
+                    IsInactive = request.IsInactive,
+                    EmailAddress = request.EmailAddress,
+                    PhoneNumber = request.PhoneNumber,
+                    FullName = request.FullName,
+                    ForceChangePassword = request.ForceChangePassword,
+                    PrefferredLanguage = request.PreferredLanguage
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateSecurityLogin(request, context);
+        }
+
+        public override Task<Empty> DeleteSecurityLogin(SecurityLoginPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new SecurityLoginPoco[] { new SecurityLoginPoco() {
+                Id = new Guid(request.Id),
+                Login = request.Login,
+                Password = request.Password,
+                Created = Convert.ToDateTime(request.Created),
+                    PasswordUpdate = request.PasswordUpdate is null?DateTime.MinValue:Convert.ToDateTime(request.PasswordUpdate),
+                    AgreementAccepted = request.AgreementAccepted is null?DateTime.MinValue:Convert.ToDateTime(request.AgreementAccepted),
+                    IsLocked = request.IsLocked,
+                    IsInactive = request.IsInactive,
+                    EmailAddress = request.EmailAddress,
+                    PhoneNumber = request.PhoneNumber,
+                    FullName = request.FullName,
+                    ForceChangePassword = request.ForceChangePassword,
+                    PrefferredLanguage = request.PreferredLanguage
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteSecurityLogin(request, context);
         }
     }
 }
