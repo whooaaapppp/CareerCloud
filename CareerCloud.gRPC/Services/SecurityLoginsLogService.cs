@@ -46,5 +46,71 @@ namespace CareerCloud.gRPC.Services
         }
                 ) ;
         }
+
+        public override Task<Empty> CreateSecurityLoginsLog(SecurityLoginsLogPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new SecurityLoginsLogPoco[] { new SecurityLoginsLogPoco() {
+                Id = new Guid(request.Id),
+                Login = new Guid(request.Login),
+                SourceIP = request.SourceIP,
+                LogonDate = Convert.ToDateTime(request.LogonDate),
+                IsSuccesful = request.IsSuccesful
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.CreateSecurityLoginsLog(request, context);
+        }
+
+        public override Task<Empty> UpdateSecurityLoginsLog(SecurityLoginsLogPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new SecurityLoginsLogPoco[] { new SecurityLoginsLogPoco() {
+                Id = new Guid(request.Id),
+                Login = new Guid(request.Login),
+                SourceIP = request.SourceIP,
+                LogonDate = Convert.ToDateTime(request.LogonDate),
+                IsSuccesful = request.IsSuccesful
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateSecurityLoginsLog(request, context);
+        }
+
+        public override Task<Empty> DeleteSecurityLoginsLog(SecurityLoginsLogPayload request, ServerCallContext context)
+        {
+
+            try
+            {
+                _logic.Delete(new SecurityLoginsLogPoco[] { new SecurityLoginsLogPoco() {
+                Id = new Guid(request.Id),
+                Login = new Guid(request.Login),
+                SourceIP = request.SourceIP,
+                LogonDate = Convert.ToDateTime(request.LogonDate),
+                IsSuccesful = request.IsSuccesful
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.DeleteSecurityLoginsLog(request, context);
+        }
     }
 }
