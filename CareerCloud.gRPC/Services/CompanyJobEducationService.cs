@@ -46,5 +46,64 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateCompanyJobEducation(CompanyJobEducationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyJobEducationPoco[] { new CompanyJobEducationPoco() {
+                Id = new Guid(request.Id),
+                Job = new Guid(request.Job),
+                    Major = request.Major,
+                    Importance = (short)request.Importance,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.CreateCompanyJobEducation(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyJobEducation(CompanyJobEducationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new CompanyJobEducationPoco[] { new CompanyJobEducationPoco() {
+                Id = new Guid(request.Id),
+                Job = new Guid(request.Job),
+                    Major = request.Major,
+                    Importance = (short)request.Importance,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateCompanyJobEducation(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyJobEducation(CompanyJobEducationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new CompanyJobEducationPoco[] { new CompanyJobEducationPoco() {
+                Id = new Guid(request.Id),
+                Job = new Guid(request.Job),
+                    Major = request.Major,
+                    Importance = (short)request.Importance,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteCompanyJobEducation(request, context);
+        }
     }
 }
