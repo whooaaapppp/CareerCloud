@@ -47,5 +47,78 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateCompanyLocation(CompanyLocationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyLocationPoco[] { new CompanyLocationPoco() {
+                Id = new Guid(request.Id),
+                    
+                    Company = new Guid(request.Company),
+                    CountryCode = request.CountryCode,
+                    Province = request.Province,
+                    Street = request.Street,
+                    City = request.City,
+                    PostalCode =request.PostalCode
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.CreateCompanyLocation(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyLocation(CompanyLocationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new CompanyLocationPoco[] { new CompanyLocationPoco() {
+                Id = new Guid(request.Id),
+
+                    Company = new Guid(request.Company),
+                    CountryCode = request.CountryCode,
+                    Province = request.Province,
+                    Street = request.Street,
+                    City = request.City,
+                    PostalCode =request.PostalCode
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteCompanyLocation(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyLocation(CompanyLocationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new CompanyLocationPoco[] { new CompanyLocationPoco() {
+                Id = new Guid(request.Id),
+
+                    Company = new Guid(request.Company),
+                    CountryCode = request.CountryCode,
+                    Province = request.Province,
+                    Street = request.Street,
+                    City = request.City,
+                    PostalCode =request.PostalCode
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateCompanyLocation(request, context);
+        }
     }
 }
