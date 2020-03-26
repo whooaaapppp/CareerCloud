@@ -51,5 +51,89 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateApplicantWorkHistory(ApplicantWorkHistoryPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new ApplicantWorkHistoryPoco[] { new ApplicantWorkHistoryPoco() {
+                Id = new Guid(request.Id),
+                    
+                    Applicant = new Guid(request.Applicant),
+                    CompanyName = request.CompanyName,
+                    CountryCode = request.CountryCode,
+                    Location = request.Location,
+                    JobTitle = request.JobTitle,
+                    JobDescription = request.JobDescription,
+                    StartMonth = (short)request.StartMonth,
+                    StartYear = request.StartYear,
+                    EndMonth = (short)request.EndMonth,
+                    EndYear = request.EndYear
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateApplicantWorkHistory(request, context);
+        }
+
+        public override Task<Empty> UpdateApplicantWorkHistory(ApplicantWorkHistoryPayload request, ServerCallContext context)
+        {
+
+            try
+            {
+                _logic.Update(new ApplicantWorkHistoryPoco[] { new ApplicantWorkHistoryPoco() {
+                Id = new Guid(request.Id),
+
+                    Applicant = new Guid(request.Applicant),
+                    CompanyName = request.CompanyName,
+                    CountryCode = request.CountryCode,
+                    Location = request.Location,
+                    JobTitle = request.JobTitle,
+                    JobDescription = request.JobDescription,
+                    StartMonth = (short)request.StartMonth,
+                    StartYear = request.StartYear,
+                    EndMonth = (short)request.EndMonth,
+                    EndYear = request.EndYear
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.UpdateApplicantWorkHistory(request, context);
+        }
+
+        public override Task<Empty> DeleteApplicantWorkHistory(ApplicantWorkHistoryPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new ApplicantWorkHistoryPoco[] { new ApplicantWorkHistoryPoco() {
+                Id = new Guid(request.Id),
+
+                    Applicant = new Guid(request.Applicant),
+                    CompanyName = request.CompanyName,
+                    CountryCode = request.CountryCode,
+                    Location = request.Location,
+                    JobTitle = request.JobTitle,
+                    JobDescription = request.JobDescription,
+                    StartMonth = (short)request.StartMonth,
+                    StartYear = request.StartYear,
+                    EndMonth = (short)request.EndMonth,
+                    EndYear = request.EndYear
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteApplicantWorkHistory(request, context);
+        }
     }
 }
