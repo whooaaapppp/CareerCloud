@@ -45,5 +45,60 @@ namespace CareerCloud.gRPC.Services
         }
                 ) ;
         }
+
+        public override Task<Empty> CreateSecurityRole(SecurityRolePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new SecurityRolePoco[] { new SecurityRolePoco() {
+                Id = new Guid(request.Id),
+                Role = request.Role,
+                IsInactive = request.IsInactive
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateSecurityRole(request, context);
+        }
+
+        public override Task<Empty> UpdateSecurityRole(SecurityRolePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new SecurityRolePoco[] { new SecurityRolePoco() {
+                Id = new Guid(request.Id),
+                Role = request.Role,
+                IsInactive = request.IsInactive
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.UpdateSecurityRole(request, context);
+        }
+
+        public override Task<Empty> DeleteSecurityRole(SecurityRolePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new SecurityRolePoco[] { new SecurityRolePoco() {
+                Id = new Guid(request.Id),
+                Role = request.Role,
+                IsInactive = request.IsInactive
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.DeleteSecurityRole(request, context);
+        }
     }
 }
