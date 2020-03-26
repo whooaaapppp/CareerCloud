@@ -46,5 +46,84 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateApplicantSkill(ApplicantSkillPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new ApplicantSkillPoco[] { new ApplicantSkillPoco() {
+                
+
+                    Id = new Guid(request.Id),
+                    Applicant = new Guid(request.Applicant),
+                    Skill = request.Skill,
+                    SkillLevel = request.SkillLevel,
+                    StartMonth = (byte)request.StartMonth,
+                    StartYear = request.StartYear,
+                    EndMonth = (byte)request.EndMonth,
+                    EndYear = request.EndYear
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.CreateApplicantSkill(request, context);
+        }
+
+        public override Task<Empty> UpdateApplicantSkill(ApplicantSkillPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new ApplicantSkillPoco[] { new ApplicantSkillPoco() {
+
+
+                    Id = new Guid(request.Id),
+                    Applicant = new Guid(request.Applicant),
+                    Skill = request.Skill,
+                    SkillLevel = request.SkillLevel,
+                    StartMonth = (byte)request.StartMonth,
+                    StartYear = request.StartYear,
+                    EndMonth = (byte)request.EndMonth,
+                    EndYear = request.EndYear
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateApplicantSkill(request, context);
+        }
+
+        public override Task<Empty> DeleteApplicantSkill(ApplicantSkillPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new ApplicantSkillPoco[] { new ApplicantSkillPoco() {
+
+
+                    Id = new Guid(request.Id),
+                    Applicant = new Guid(request.Applicant),
+                    Skill = request.Skill,
+                    SkillLevel = request.SkillLevel,
+                    StartMonth = (byte)request.StartMonth,
+                    StartYear = request.StartYear,
+                    EndMonth = (byte)request.EndMonth,
+                    EndYear = request.EndYear
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteApplicantSkill(request, context);
+        }
     }
 }
