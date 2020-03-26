@@ -45,5 +45,62 @@ namespace CareerCloud.gRPC.Services
         }
                 ) ;
         }
+
+        public override Task<Empty> CreateSecurityLoginsRole(SecurityLoginsRolePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new SecurityLoginsRolePoco[] { new SecurityLoginsRolePoco() {
+                Id = new Guid(request.Id),
+                Login = new Guid(request.Login),
+                Role = new Guid(request.Role)
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateSecurityLoginsRole(request, context);
+        }
+
+        public override Task<Empty> UpdateSecurityLoginsRole(SecurityLoginsRolePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new SecurityLoginsRolePoco[] { new SecurityLoginsRolePoco() {
+                Id = new Guid(request.Id),
+                Login = new Guid(request.Login),
+                Role = new Guid(request.Role)
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateSecurityLoginsRole(request, context);
+        }
+
+        public override Task<Empty> DeleteSecurityLoginsRole(SecurityLoginsRolePayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new SecurityLoginsRolePoco[] { new SecurityLoginsRolePoco() {
+                Id = new Guid(request.Id),
+                Login = new Guid(request.Login),
+                Role = new Guid(request.Role)
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteSecurityLoginsRole(request, context);
+        }
     }
 }
