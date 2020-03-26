@@ -46,5 +46,69 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateCompanyDescription(CompanyDescriptionPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyDescriptionPoco[] { new CompanyDescriptionPoco() {
+                Id = new Guid(request.Id),
+                Company = new Guid(request.Company),
+                   LanguageId = request.LanguageId,
+                    CompanyName = request.CompanyName,
+                    CompanyDescription = request.CompanyDescription
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.CreateCompanyDescription(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyDescription(CompanyDescriptionPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new CompanyDescriptionPoco[] { new CompanyDescriptionPoco() {
+                Id = new Guid(request.Id),
+                Company = new Guid(request.Company),
+                   LanguageId = request.LanguageId,
+                    CompanyName = request.CompanyName,
+                    CompanyDescription = request.CompanyDescription
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+            }
+
+
+                return base.UpdateCompanyDescription(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyDescription(CompanyDescriptionPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyDescriptionPoco[] { new CompanyDescriptionPoco() {
+                Id = new Guid(request.Id),
+                Company = new Guid(request.Company),
+                   LanguageId = request.LanguageId,
+                    CompanyName = request.CompanyName,
+                    CompanyDescription = request.CompanyDescription
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+            }
+                
+
+                return base.DeleteCompanyDescription(request, context);
+        }
     }
 }
