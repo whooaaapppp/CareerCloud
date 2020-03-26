@@ -45,5 +45,71 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateCompanyJobSkill(CompanyJobSkillPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyJobSkillPoco[] { new CompanyJobSkillPoco() {
+                Id = new Guid(request.Id),
+                    Job = new Guid(request.Job),
+                   
+                    Skill = request.Skill,
+                    SkillLevel = request.SkillLevel,
+                    Importance = request.Importance,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateCompanyJobSkill(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyJobSkill(CompanyJobSkillPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new CompanyJobSkillPoco[] { new CompanyJobSkillPoco() {
+                Id = new Guid(request.Id),
+                    Job = new Guid(request.Job),
+
+                    Skill = request.Skill,
+                    SkillLevel = request.SkillLevel,
+                    Importance = request.Importance,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateCompanyJobSkill(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyJobSkill(CompanyJobSkillPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new CompanyJobSkillPoco[] { new CompanyJobSkillPoco() {
+                Id = new Guid(request.Id),
+                    Job = new Guid(request.Job),
+
+                    Skill = request.Skill,
+                    SkillLevel = request.SkillLevel,
+                    Importance = request.Importance,
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteCompanyJobSkill(request, context);
+        }
     }
 }
