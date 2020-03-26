@@ -46,5 +46,78 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateApplicantEducation(ApplicantEducationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new ApplicantEducationPoco[] { new ApplicantEducationPoco() {
+                    Id = new Guid(request.Id),
+                    Applicant = new Guid(request.Applicant),
+                    CertificateDiploma = request.CertificateDiploma,
+                    CompletionDate = request.CompletionDate is null ? DateTime.MinValue : Convert.ToDateTime(request.CompletionDate),
+                    CompletionPercent = (byte?)request.CompletionPercent,
+                    Major = request.Major,
+                    StartDate = request.StartDate is null ? DateTime.MinValue : Convert.ToDateTime(request.StartDate)
+
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+
+            return base.CreateApplicantEducation(request, context);
+        }
+
+        public override Task<Empty> UpdateApplicantEducation(ApplicantEducationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Update(new ApplicantEducationPoco[] { new ApplicantEducationPoco() {
+                    Id = new Guid(request.Id),
+                    Applicant = new Guid(request.Applicant),
+                    CertificateDiploma = request.CertificateDiploma,
+                    CompletionDate = request.CompletionDate is null ? DateTime.MinValue : Convert.ToDateTime(request.CompletionDate),
+                    CompletionPercent = (byte?)request.CompletionPercent,
+                    Major = request.Major,
+                    StartDate = request.StartDate is null ? DateTime.MinValue : Convert.ToDateTime(request.StartDate)
+
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.UpdateApplicantEducation(request, context);
+        }
+
+        public override Task<Empty> DeleteApplicantEducation(ApplicantEducationPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new ApplicantEducationPoco[] { new ApplicantEducationPoco() {
+                    Id = new Guid(request.Id),
+                    Applicant = new Guid(request.Applicant),
+                    CertificateDiploma = request.CertificateDiploma,
+                    CompletionDate = request.CompletionDate is null ? DateTime.MinValue : Convert.ToDateTime(request.CompletionDate),
+                    CompletionPercent = (byte?)request.CompletionPercent,
+                    Major = request.Major,
+                    StartDate = request.StartDate is null ? DateTime.MinValue : Convert.ToDateTime(request.StartDate)
+
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteApplicantEducation(request, context);
+        }
     }
 }
