@@ -46,5 +46,65 @@ namespace CareerCloud.gRPC.Services
                 }
                 );
         }
+
+        public override Task<Empty> CreateCompanyJobDescription(CompanyJobDescriptionPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Add(new CompanyJobDescriptionPoco[] { new CompanyJobDescriptionPoco() {
+                Id = new Guid(request.Id),
+                    Job = new Guid(request.Job),
+                    JobName = request.JobName,
+                    JobDescriptions = request.JobDescriptions
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.CreateCompanyJobDescription(request, context);
+        }
+
+        public override Task<Empty> UpdateCompanyJobDescription(CompanyJobDescriptionPayload request, ServerCallContext context)
+        {
+
+            try
+            {
+                _logic.Update(new CompanyJobDescriptionPoco[] { new CompanyJobDescriptionPoco() {
+                Id = new Guid(request.Id),
+                    Job = new Guid(request.Job),
+                    JobName = request.JobName,
+                    JobDescriptions = request.JobDescriptions
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+            return base.UpdateCompanyJobDescription(request, context);
+        }
+
+        public override Task<Empty> DeleteCompanyJobDescription(CompanyJobDescriptionPayload request, ServerCallContext context)
+        {
+            try
+            {
+                _logic.Delete(new CompanyJobDescriptionPoco[] { new CompanyJobDescriptionPoco() {
+                Id = new Guid(request.Id),
+                    Job = new Guid(request.Job),
+                    JobName = request.JobName,
+                    JobDescriptions = request.JobDescriptions
+            } });
+            }
+            catch (AggregateException e)
+            {
+                IEnumerable<ValidationException> exceptions = e.InnerExceptions.Cast<ValidationException>();
+
+            }
+
+            return base.DeleteCompanyJobDescription(request, context);
+        }
     }
 }
